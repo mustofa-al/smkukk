@@ -5,6 +5,10 @@
  */
 package view;
 
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author A
@@ -181,4 +185,32 @@ public class DaftarMasyarakat extends javax.swing.JFrame {
     private javax.swing.JTextField tfTelp;
     private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnDaftar() {
+        return btDaftar;
+    }
+
+    public JTextField getFieldNik() {
+        return tfNIK;
+    }
+    
+    public JTextField getFieldNama() {
+        return tfNama;
+    }
+    
+    public JTextField getFieldUsername() {
+        return tfUsername;
+    }
+    
+    public JTextField getFieldPassword() {
+        return tfPassword;
+    }
+    
+    public JTextField getFieldTelp() {
+        return tfTelp;
+    }
+
+    public void showAlert(String alert) {
+        JOptionPane.showMessageDialog(this, alert);
+    }
 }

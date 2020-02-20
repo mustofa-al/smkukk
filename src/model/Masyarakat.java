@@ -35,6 +35,28 @@ public class Masyarakat {
     public String getTelp() {
         return telp;
     }
+
+    public void setNik(String nik) {
+        this.nik = nik;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setTelp(String telp) {
+        this.telp = telp;
+    }
+    
+    
    
    
 }
