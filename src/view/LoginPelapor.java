@@ -7,18 +7,17 @@ package view;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
  * @author A
  */
-public class DaftarMasyarakat extends javax.swing.JFrame {
+public class LoginPelapor extends javax.swing.JFrame {
 
     /**
-     * Creates new form DaftarMasyarakat
+     * Creates new form Login
      */
-    public DaftarMasyarakat() {
+    public LoginPelapor() {
         initComponents();
     }
 
@@ -36,30 +35,37 @@ public class DaftarMasyarakat extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         tfNIK = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        tfUsername = new javax.swing.JTextField();
+        ptfPassword = new javax.swing.JPasswordField();
+        btMasuk = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        tfPassword = new javax.swing.JPasswordField();
-        jLabel5 = new javax.swing.JLabel();
-        tfNama = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        tfTelp = new javax.swing.JTextField();
         btDaftar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Daftar | Pelaporan Pengaduan Masyarakat");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login Masyarakat | Pelaporan Pengaduan Masyarakat");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Daftar");
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel1.setText("Masuk sebagai Pelapor");
 
-        jLabel2.setText("NIK (KTP)");
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jLabel2.setText("NIK");
 
-        jLabel3.setText("Username");
+        tfNIK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNIKActionPerformed(evt);
+            }
+        });
 
-        jLabel4.setText("Password");
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jLabel3.setText("Password");
 
-        jLabel5.setText("Nama Lengkap");
+        btMasuk.setText("Masuk");
+        btMasuk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMasukActionPerformed(evt);
+            }
+        });
 
-        jLabel6.setText("No. Telp");
+        jLabel4.setText("atau");
 
         btDaftar.setText("Daftar");
 
@@ -68,20 +74,20 @@ public class DaftarMasyarakat extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(tfNIK)
-                    .addComponent(jLabel3)
-                    .addComponent(tfUsername)
-                    .addComponent(jLabel4)
-                    .addComponent(tfPassword)
-                    .addComponent(jLabel5)
-                    .addComponent(tfNama)
-                    .addComponent(jLabel6)
-                    .addComponent(tfTelp)
-                    .addComponent(btDaftar, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(tfNIK)
+                            .addComponent(ptfPassword)
+                            .addComponent(btMasuk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btDaftar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jLabel4)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -89,29 +95,21 @@ public class DaftarMasyarakat extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfNIK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ptfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btMasuk)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(btDaftar)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -120,8 +118,8 @@ public class DaftarMasyarakat extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,6 +132,17 @@ public class DaftarMasyarakat extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tfNIKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNIKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfNIKActionPerformed
+
+    private void btMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMasukActionPerformed
+        // TODO add your handling code here:
+        if (isInputValid()) {
+            // not yet
+        }
+    }//GEN-LAST:event_btMasukActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,65 +161,52 @@ public class DaftarMasyarakat extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DaftarMasyarakat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPelapor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DaftarMasyarakat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPelapor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DaftarMasyarakat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPelapor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DaftarMasyarakat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPelapor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DaftarMasyarakat().setVisible(true);
+                new LoginPelapor().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDaftar;
+    private javax.swing.JButton btMasuk;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField ptfPassword;
     private javax.swing.JTextField tfNIK;
-    private javax.swing.JTextField tfNama;
-    private javax.swing.JPasswordField tfPassword;
-    private javax.swing.JTextField tfTelp;
-    private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
 
-    public JButton getBtnDaftar() {
+    private boolean isInputValid() {
+        boolean isValid = false;
+        if (tfNIK.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Kolom username tidak boleh kosong!");
+        } else if (ptfPassword.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Kolom password tidak boleh kosong!");
+        } else {
+            isValid = true;
+        }
+        return isValid;
+    }
+
+    public JButton getButtonDaftar() {
         return btDaftar;
-    }
-
-    public JTextField getFieldNik() {
-        return tfNIK;
-    }
-    
-    public JTextField getFieldNama() {
-        return tfNama;
-    }
-    
-    public JTextField getFieldUsername() {
-        return tfUsername;
-    }
-    
-    public JTextField getFieldPassword() {
-        return tfPassword;
-    }
-    
-    public JTextField getFieldTelp() {
-        return tfTelp;
-    }
-
-    public void showAlert(String alert) {
-        JOptionPane.showMessageDialog(this, alert);
     }
 }

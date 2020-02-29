@@ -9,7 +9,7 @@ package model;
  *
  * @author A
  */
-public class Masyarakat {
+public class Pelapor {
    private String nik;
    private String nama;
    private String username;

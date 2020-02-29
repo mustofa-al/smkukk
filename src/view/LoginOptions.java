@@ -43,7 +43,12 @@ public class LoginOptions extends javax.swing.JFrame {
 
         jLabel2.setText("Masuk sebagai:");
 
-        btLoginMasyarakat.setText("Masyarakat");
+        btLoginMasyarakat.setText("Pelapor");
+        btLoginMasyarakat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLoginMasyarakatActionPerformed(evt);
+            }
+        });
 
         btLoginPetugas.setText("Petugas");
 
@@ -98,6 +103,10 @@ public class LoginOptions extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btLoginMasyarakatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginMasyarakatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btLoginMasyarakatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -141,7 +150,7 @@ public class LoginOptions extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-    public JButton getLoginMasyarakatButton() {
+    public JButton getLoginPelaportButton() {
         return btLoginMasyarakat;
     }
 

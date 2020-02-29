@@ -96,8 +96,11 @@
         </Component>
         <Component class="javax.swing.JButton" name="btLoginMasyarakat">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Masyarakat"/>
+            <Property name="text" type="java.lang.String" value="Pelapor"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btLoginMasyarakatActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="LoginOptions_btLoginMasyarakat"/>
           </AuxValues>

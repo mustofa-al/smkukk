@@ -7,7 +7,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import view.LoginMasyarakat;
+import view.LoginPelapor;
 import view.LoginOptions;
 import view.LoginPetugas;
 
@@ -29,7 +29,7 @@ public class LoginOptionsController {
     }
 
     private void initListener() {
-        loginOptionsView.getLoginMasyarakatButton().addActionListener((ActionEvent ae) -> {
+        loginOptionsView.getLoginPelaportButton().addActionListener((ActionEvent ae) -> {
             openLoginMasyarakat();
         });
         loginOptionsView.getLoginPetugasButton().addActionListener((ActionEvent ae) -> {
@@ -38,7 +38,7 @@ public class LoginOptionsController {
     }
 
     private void openLoginMasyarakat() {
-        new LoginMasyarakatController(new LoginMasyarakat());
+        new LoginPelaporController(new LoginPelapor());
         loginOptionsView.dispose();
     }
 
