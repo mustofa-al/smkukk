@@ -38,8 +38,8 @@ public class LoginPelaporController {
        loginPelaporView.getButtonMasuk().addActionListener((ae) -> {
            if (isInputValid()) {
                pelaporDAO.login(
-                       loginPelaporView.getFieldNik().getText(),
-                       loginPelaporView.getFieldPassword().getText(),
+                       loginPelaporView.getFieldNik().getText().toString(),
+                       loginPelaporView.getFieldPassword().getText().toString(),
                        new ResultListener() {
                    @Override
                    public void onSuccess() {
