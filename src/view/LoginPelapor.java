@@ -7,6 +7,8 @@ package view;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -35,7 +37,7 @@ public class LoginPelapor extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         tfNIK = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        ptfPassword = new javax.swing.JPasswordField();
+        pfPassword = new javax.swing.JPasswordField();
         btMasuk = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btDaftar = new javax.swing.JButton();
@@ -82,7 +84,7 @@ public class LoginPelapor extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(tfNIK)
-                            .addComponent(ptfPassword)
+                            .addComponent(pfPassword)
                             .addComponent(btMasuk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btDaftar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -102,7 +104,7 @@ public class LoginPelapor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ptfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btMasuk)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -190,7 +192,7 @@ public class LoginPelapor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField ptfPassword;
+    private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfNIK;
     // End of variables declaration//GEN-END:variables
 
@@ -198,7 +200,7 @@ public class LoginPelapor extends javax.swing.JFrame {
         boolean isValid = false;
         if (tfNIK.getText().length() == 0) {
             JOptionPane.showMessageDialog(this, "Kolom username tidak boleh kosong!");
-        } else if (ptfPassword.getText().length() == 0) {
+        } else if (pfPassword.getText().length() == 0) {
             JOptionPane.showMessageDialog(this, "Kolom password tidak boleh kosong!");
         } else {
             isValid = true;
@@ -208,5 +210,26 @@ public class LoginPelapor extends javax.swing.JFrame {
 
     public JButton getButtonDaftar() {
         return btDaftar;
+    }
+    
+    public JButton getButtonMasuk() {
+        return btMasuk;
+    }
+    
+    public JTextField getFieldNik() {
+        return tfNIK;
+    }
+    
+    public JTextField getFieldPassword() {
+        return pfPassword;
+    }
+    
+    
+    public void showAlert(String alert) {
+        JOptionPane.showMessageDialog(this, alert);
+    }
+    
+    public void showErrorAlert(String alert) {
+        JOptionPane.showMessageDialog(this, alert, "Error!", JOptionPane.ERROR_MESSAGE);
     }
 }

@@ -7,6 +7,7 @@ package view;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -38,7 +39,7 @@ public class RegisterPelapor extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         tfUsername = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        tfPassword = new javax.swing.JPasswordField();
+        pfPassword = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         tfNama = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -76,7 +77,7 @@ public class RegisterPelapor extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(tfUsername)
                     .addComponent(jLabel4)
-                    .addComponent(tfPassword)
+                    .addComponent(pfPassword)
                     .addComponent(jLabel5)
                     .addComponent(tfNama)
                     .addComponent(jLabel6)
@@ -100,7 +101,7 @@ public class RegisterPelapor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -180,9 +181,9 @@ public class RegisterPelapor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfNIK;
     private javax.swing.JTextField tfNama;
-    private javax.swing.JPasswordField tfPassword;
     private javax.swing.JTextField tfTelp;
     private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
@@ -204,7 +205,7 @@ public class RegisterPelapor extends javax.swing.JFrame {
     }
     
     public JTextField getFieldPassword() {
-        return tfPassword;
+        return pfPassword;
     }
     
     public JTextField getFieldTelp() {

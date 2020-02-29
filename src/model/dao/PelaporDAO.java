@@ -6,7 +6,9 @@
 package model.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Pelapor;
@@ -19,7 +21,7 @@ import model.db.DBConnection;
 public class PelaporDAO {
     public void insert(Pelapor data, ResultListener callback) {
         String query = "INSERT INTO masyarakat (nik, nama, username, password, telp) "
-                +"VALUES (?, ?, ?, ?, ?)";
+                +"VALUES (?, ?, ?, MD5(?), ?)";
         try {
             PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
             statement.setString(1, data.getNik());
@@ -30,6 +32,22 @@ public class PelaporDAO {
             statement.execute();
             statement.close();
             callback.onSuccess();
+        } catch (SQLException e) {
+            Logger.getLogger(PelaporDAO.class.getName()).log(Level.SEVERE, null, e);
+            callback.onFailure(e);
+        }
+    }
+    
+    public void login(String nik, String password, ResultListener callback) {
+        String query = "SELECT * FROM masyarakat WHERE nik = "+nik+" AND password = "+password;
+        try {
+            Statement statement = DBConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query);
+            if (result.next()) {
+                callback.onSuccess();
+            } else {
+                callback.onFailure(null);
+            }
         } catch (SQLException e) {
             Logger.getLogger(PelaporDAO.class.getName()).log(Level.SEVERE, null, e);
             callback.onFailure(e);

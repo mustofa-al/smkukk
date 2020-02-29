@@ -5,6 +5,10 @@
  */
 package controller;
 
+import static controller.RegisterPelaporController.isNumeric;
+import java.sql.SQLException;
+import model.dao.PelaporDAO;
+import model.dao.ResultListener;
 import view.RegisterPelapor;
 import view.LoginPelapor;
 
@@ -14,11 +18,13 @@ import view.LoginPelapor;
  */
 public class LoginPelaporController {
     private LoginPelapor loginPelaporView;
+    private PelaporDAO pelaporDAO;
 
-    public LoginPelaporController(LoginPelapor loginMasyarakatView) {
-        this.loginPelaporView = loginMasyarakatView;
+    public LoginPelaporController(LoginPelapor loginPelaporView) {
+        this.loginPelaporView = loginPelaporView;
         initView();
         initListener();
+        initDAO();
     }
 
     private void initView() {
@@ -27,11 +33,55 @@ public class LoginPelaporController {
 
     private void initListener() {
        loginPelaporView.getButtonDaftar().addActionListener((ae) -> {
-           openDaftarMasyarakat();
+           openDaftarPelapor();
+       });
+       loginPelaporView.getButtonMasuk().addActionListener((ae) -> {
+           if (isInputValid()) {
+               pelaporDAO.login(
+                       loginPelaporView.getFieldNik().getText(),
+                       loginPelaporView.getFieldPassword().getText(),
+                       new ResultListener() {
+                   @Override
+                   public void onSuccess() {
+                       loginPelaporView.showAlert("success");
+                   }
+
+                   @Override
+                   public void onFailure(SQLException e) {
+                       loginPelaporView.showErrorAlert("Gagal login. Cek kembali kombinasi NIK & password Anda!");
+                   }
+               });
+           }
        });
     }
 
-    private void openDaftarMasyarakat() {
+    private void openDaftarPelapor() {
         new RegisterPelaporController(new RegisterPelapor());
+    }
+
+    private boolean isInputValid() {
+        boolean isValid = false;
+        if (loginPelaporView.getFieldNik().getText().length() == 0) {
+            loginPelaporView.showAlert("NIK tidak boleh kosong");
+        } else {
+            if (loginPelaporView.getFieldNik().getText().length() < 16) {
+                loginPelaporView.showAlert("Format NIK tidak sesuai");
+            } else {
+                if (!isNumeric(loginPelaporView.getFieldNik().getText())) {
+                    loginPelaporView.showAlert("Format NIK tidak sesuai");
+                } else {
+                    if (loginPelaporView.getFieldPassword().getText().length() == 0) {
+                        loginPelaporView.showAlert("Password tidak boleh kosong");
+                    } else {
+                        isValid = true;
+                    }
+                }
+            }
+        }
+        return isValid;
+    }
+    
+    private void initDAO() {
+        pelaporDAO = new PelaporDAO();
     }
 }

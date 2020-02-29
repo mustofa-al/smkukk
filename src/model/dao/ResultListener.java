@@ -5,6 +5,7 @@
  */
 package model.dao;
 
+import com.sun.istack.internal.Nullable;
 import java.sql.SQLException;
 
 /**
@@ -13,5 +14,5 @@ import java.sql.SQLException;
  */
 public interface ResultListener {
     public void onSuccess();
-    public void onFailure(SQLException e);
+    public void onFailure(@Nullable SQLException e);
 }
