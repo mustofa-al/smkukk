@@ -7,10 +7,13 @@ package controller;
 
 import static controller.RegisterPelaporController.isNumeric;
 import java.sql.SQLException;
+import model.Pelapor;
 import model.dao.PelaporDAO;
+import model.dao.ResultDataListener;
 import model.dao.ResultListener;
 import view.RegisterPelapor;
 import view.LoginPelapor;
+import view.PelaporHome;
 
 /**
  *
@@ -40,10 +43,11 @@ public class LoginPelaporController {
                pelaporDAO.login(
                        loginPelaporView.getFieldNik().getText().toString(),
                        loginPelaporView.getFieldPassword().getText().toString(),
-                       new ResultListener() {
+                       new ResultDataListener<Pelapor>() {
                    @Override
-                   public void onSuccess() {
-                       loginPelaporView.showAlert("success");
+                   public void onSuccess(Pelapor pelapor) {
+                       new PelaporHomeController(new PelaporHome(), pelapor);
+                       loginPelaporView.dispose();
                    }
 
                    @Override

@@ -38,13 +38,15 @@ public class PelaporDAO {
         }
     }
     
-    public void login(String nik, String password, ResultListener callback) {
+    public void login(String nik, String password, ResultDataListener<Pelapor> callback) {
         String query = "SELECT * FROM masyarakat WHERE nik = "+nik+" AND password = "+password;
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             ResultSet result = statement.executeQuery(query);
             if (result.next()) {
-                callback.onSuccess();
+                Pelapor pelapor = new Pelapor();
+                pelapor.setNik(result.getString("nik"));
+                callback.onSuccess(pelapor);
             } else {
                 callback.onFailure(null);
             }

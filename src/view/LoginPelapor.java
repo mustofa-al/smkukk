@@ -43,7 +43,7 @@ public class LoginPelapor extends javax.swing.JFrame {
         btDaftar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login Masyarakat | Pelaporan Pengaduan Masyarakat");
+        setTitle("Login Pelapor | Pelaporan Pengaduan Masyarakat");
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setText("Masuk sebagai Pelapor");

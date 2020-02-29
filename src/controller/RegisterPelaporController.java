@@ -16,6 +16,7 @@ import model.Pelapor;
 import model.dao.ResultListener;
 import view.RegisterPelapor;
 import view.LoginPelapor;
+import view.PelaporHome;
 
 /**
  *
@@ -49,6 +50,7 @@ public class RegisterPelaporController {
                     @Override
                     public void onSuccess() {
                         registerPelaporView.showAlert("Berhasil mendaftar");
+                        new PelaporHomeController(new PelaporHome(), pelapor);
                         registerPelaporView.dispose();
                     }
 

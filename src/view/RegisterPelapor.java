@@ -47,7 +47,7 @@ public class RegisterPelapor extends javax.swing.JFrame {
         btDaftar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Daftar | Pelaporan Pengaduan Masyarakat");
+        setTitle("Daftar Sebagai Pelapor| Pelaporan Pengaduan Masyarakat");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Daftar");
