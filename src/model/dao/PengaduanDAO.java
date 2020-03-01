@@ -5,9 +5,11 @@
  */
 package model.dao;
 
+import config.FileHelper;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,13 +29,9 @@ import model.db.DBConnection;
 public class PengaduanDAO {
     public void insert(Pengaduan data, ResultListener callback) {
         String query = null;
-        FileInputStream stream = null;
+        InputStream stream = null;
         if (data.getFoto() != null) {
-            try {
-                stream = new FileInputStream(data.getFoto());
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(PengaduanDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            stream = new FileHelper().byteToInputStream(data.getFoto());
             query = "INSERT INTO pengaduan (tgl_pengaduan, nik, isi_laporan, foto) "
                 +"VALUES (?, ?, ?, ?)";
         } else {
@@ -95,9 +93,9 @@ public class PengaduanDAO {
                 pengaduan.getPelapor().setTelp(result.getString("telp"));
                 pengaduan.setIsiLaporan(result.getString("isi_laporan"));
                 pengaduan.getPelapor().setNama(result.getString("nama"));
-//                if (result.getBlob("foto") != null) {
-//                    pengaduan.setFoto(foto);
-//                }
+                if (result.getBlob("foto") != null) {
+                    pengaduan.setFoto(result.getBlob("foto").getBytes(1, (int) result.getBlob("foto").length()));
+                }
                 callback.onSuccess(pengaduan);
             } else {
                 callback.onFailure(null);

@@ -6,9 +6,14 @@
 package controller;
 
 import config.DateConverter;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Pelapor;
 import model.Pengaduan;
 import model.dao.PengaduanDAO;
@@ -44,7 +49,27 @@ public class PengaduanBaruController {
                 pengaduan.setNik(pelapor.getNik());
                 pengaduan.setIsiLaporan(pengaduanBaruView.getFieldLaporan().getText());
                 if (pengaduanBaruView.getFileToUpload() != null) {
-                    pengaduan.setFoto(pengaduanBaruView.getFileToUpload());
+                    FileInputStream fis = null;
+                    try {
+                        fis = new FileInputStream(pengaduanBaruView.getFileToUpload());
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(PengaduanBaruController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    //System.out.println(file.exists() + "!!");
+                    //InputStream in = resource.openStream();
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    byte[] buf = new byte[1024];
+                    try {
+                        for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                            bos.write(buf, 0, readNum); //no doubt here is 0
+                            //Writes len bytes from the specified byte array starting at offset off to this byte array output stream.
+                            System.out.println("read " + readNum + " bytes,");
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(PengaduanBaruController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    byte[] bytes = bos.toByteArray();
+                    pengaduan.setFoto(bytes);
                 }
                 pengaduanDAO.insert(pengaduan, new ResultListener() {
                     @Override

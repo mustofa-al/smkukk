@@ -5,7 +5,15 @@
  */
 package controller;
 
+import config.FileHelper;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import model.Pengaduan;
 import model.dao.PengaduanDAO;
 import model.dao.ResultDataListener;
@@ -41,6 +49,16 @@ public class DetailPengaduanController {
                 detailPengaduanView.getLabelTanggal().setText(data.getDate());
                 detailPengaduanView.getLabelNoTelp().setText(data.getPelapor().getTelp());
                 detailPengaduanView.getLabelIsiLaporan().setText(data.getIsiLaporan());
+                BufferedImage bi = null;
+                try {
+                    bi = ImageIO.read(new FileHelper().byteToInputStream(data.getFoto()));
+                } catch (IOException ex) {
+                    Logger.getLogger(DetailPengaduanController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Image imagedResized = bi.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
+                ImageIcon icon = new ImageIcon(imagedResized);
+                detailPengaduanView.getLabelImage().setIcon(icon);
+                detailPengaduanView.getLabelImage().setText("");
             }
 
             @Override

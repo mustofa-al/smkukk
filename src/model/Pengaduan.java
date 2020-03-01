@@ -17,8 +17,7 @@ public class Pengaduan {
     private String nik;
     private Pelapor pelapor;
     private String isiLaporan;
-    private File foto;
-    private byte[] photo;
+    private byte[] foto;
     private StatusPengaduan status;
 
     public int getId() {
@@ -41,7 +40,7 @@ public class Pengaduan {
         return isiLaporan;
     }
 
-    public File getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
@@ -69,20 +68,12 @@ public class Pengaduan {
         this.isiLaporan = isiLaporan;
     }
 
-    public void setFoto(File foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 
     public void setStatus(StatusPengaduan status) {
         this.status = status;
-    }
-
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
     }
     
 }
