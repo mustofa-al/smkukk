@@ -5,6 +5,7 @@
  */
 package model.dao;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.PreparedStatement;
@@ -72,6 +73,34 @@ public class PengaduanDAO {
                 pengaduan.getPelapor().setNama(result.getString("nama"));
                 listPengaduan.add(pengaduan);
                 callback.onSuccess(listPengaduan);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, null, e);
+            callback.onFailure(e);
+        }
+    }
+    
+    public void getDetailPengaduan(int pengaduanId, ResultDataListener<Pengaduan> callback) {
+        String query = "SELECT masyarakat.nama, masyarakat.telp, pengaduan.id_pengaduan, pengaduan.tgl_pengaduan, "
+                + "pengaduan.isi_laporan, pengaduan.foto FROM pengaduan, masyarakat "
+                + "WHERE pengaduan.id_pengaduan = "+pengaduanId+" AND pengaduan.status = 'terkirim'";
+        try {
+            Statement statement = DBConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query);
+            if (result.next()) {
+                Pengaduan pengaduan = new Pengaduan();
+                pengaduan.setId(result.getInt("id_pengaduan"));
+                pengaduan.setPelapor(new Pelapor());
+                pengaduan.setDate(result.getString("tgl_pengaduan"));
+                pengaduan.getPelapor().setTelp(result.getString("telp"));
+                pengaduan.setIsiLaporan(result.getString("isi_laporan"));
+                pengaduan.getPelapor().setNama(result.getString("nama"));
+//                if (result.getBlob("foto") != null) {
+//                    pengaduan.setFoto(foto);
+//                }
+                callback.onSuccess(pengaduan);
+            } else {
+                callback.onFailure(null);
             }
         } catch (SQLException e) {
             Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, null, e);

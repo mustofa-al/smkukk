@@ -32,7 +32,6 @@ public class PetugasDAO {
                 petugas.setNama(result.getString("nama_petugas"));
                 petugas.setUsername(result.getString("username"));
                 petugas.setTelp(result.getString("telp"));
-                Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, result.getString("level"));
                 petugas.setStatus(StatusPetugas.valueOf(result.getString("level")));
                 callback.onSuccess(petugas);
             } else {

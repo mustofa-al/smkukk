@@ -5,10 +5,15 @@
  */
 package controller;
 
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 import model.Pengaduan;
 import model.Petugas;
 import model.StatusPetugas;
@@ -16,6 +21,8 @@ import model.TabelModelPengaduan;
 import model.dao.PengaduanDAO;
 import model.dao.PetugasDAO;
 import model.dao.ResultDataListener;
+import view.DetailPengaduan;
+import view.PengaduanBaru;
 import view.PetugasHome;
 
 /**
@@ -23,9 +30,11 @@ import view.PetugasHome;
  * @author A
  */
 public class PetugasHomeController {
+
     private PetugasHome petugasHomeView;
     private Petugas petugas;
     private PengaduanDAO pengaduanDAO;
+    private List<Pengaduan> listPengaduan = new ArrayList<>();
 
     public PetugasHomeController(PetugasHome petugasHomeView, Petugas petugas) {
         this.petugasHomeView = petugasHomeView;
@@ -33,6 +42,7 @@ public class PetugasHomeController {
         initDao();
         initView();
         initData();
+        initListener();
     }
 
     private void initView() {
@@ -43,14 +53,19 @@ public class PetugasHomeController {
         } else if (petugas.getStatus() == StatusPetugas.petugas) {
             status = "Petugas";
         }
-        petugasHomeView.getLabelInfo().setText("Login sebagai: "+petugas.getNama()+" ("+status+")");
+        petugasHomeView.getLabelInfo().setText("Login sebagai: " + petugas.getNama() + " (" + status + ")");
     }
 
     private void initData() {
         pengaduanDAO.getData(new ResultDataListener<List<Pengaduan>>() {
             @Override
             public void onSuccess(List<Pengaduan> data) {
-                petugasHomeView.getTabelPengaduan().setModel(new TabelModelPengaduan(data));
+                listPengaduan = data;
+                if (data.size() != 0) {
+                    petugasHomeView.getTabelPengaduan().setModel(new TabelModelPengaduan(data));
+                } else {
+                    petugasHomeView.showAlert("Belum ada data untuk ditampilkan!");
+                }
             }
 
             @Override
@@ -63,6 +78,18 @@ public class PetugasHomeController {
     private void initDao() {
         pengaduanDAO = new PengaduanDAO();
     }
-    
-    
+
+    private void initListener() {
+        petugasHomeView.getTabelPengaduan().addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                JTable table = (JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                    new DetailPengaduanController(new DetailPengaduan(), listPengaduan.get(row).getId());
+                }
+            }
+        });
+    }
+
 }

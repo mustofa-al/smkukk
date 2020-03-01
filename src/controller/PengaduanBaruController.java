@@ -6,6 +6,8 @@
 package controller;
 
 import config.DateConverter;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.SQLException;
 import model.Pelapor;
 import model.Pengaduan;
