@@ -86,7 +86,7 @@ public class PetugasHomeController {
                 Point point = mouseEvent.getPoint();
                 int row = table.rowAtPoint(point);
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-                    new DetailPengaduanController(new DetailPengaduan(), listPengaduan.get(row).getId());
+                    new DetailPengaduanController(new DetailPengaduan(), listPengaduan.get(row).getId(), petugas);
                 }
             }
         });

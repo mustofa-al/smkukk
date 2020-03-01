@@ -5,6 +5,7 @@
  */
 package controller;
 
+import config.DateTools;
 import config.FileHelper;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -15,9 +16,11 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import model.Pengaduan;
+import model.Petugas;
 import model.dao.PengaduanDAO;
 import model.dao.ResultDataListener;
 import view.DetailPengaduan;
+import view.TanggapanBaru;
 
 /**
  *
@@ -26,14 +29,17 @@ import view.DetailPengaduan;
 public class DetailPengaduanController {
     private DetailPengaduan detailPengaduanView;
     private int pengajuanId;
+    private Petugas petugas;
     private PengaduanDAO pengaduanDAO;
 
-    public DetailPengaduanController(DetailPengaduan detailPengaduanView, int pengajuanId) {
+    public DetailPengaduanController(DetailPengaduan detailPengaduanView, int pengajuanId, Petugas petugas) {
         this.detailPengaduanView = detailPengaduanView;
         this.pengajuanId = pengajuanId;
+        this.petugas = petugas;
         initDao();
         initView();
         initData();
+        initListener();
     }
 
     private void initView() {
@@ -71,6 +77,12 @@ public class DetailPengaduanController {
 
     private void initDao() {
         pengaduanDAO = new PengaduanDAO();
+    }
+
+    private void initListener() {
+        detailPengaduanView.getButtonTanggapan().addActionListener((ae) -> {
+            new TanggapanBaruController(new TanggapanBaru(), pengajuanId, petugas);
+        });
     }
     
     

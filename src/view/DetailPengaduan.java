@@ -5,6 +5,7 @@
  */
 package view;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -41,8 +42,9 @@ public class DetailPengaduan extends javax.swing.JFrame {
         labelImage = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         labelNoTelp = new javax.swing.JLabel();
+        btBeriTanggapan = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jLabel1.setText("Nama Pelapor             :");
@@ -62,7 +64,7 @@ public class DetailPengaduan extends javax.swing.JFrame {
         labelTanggal.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         labelTanggal.setText("jLabel6");
 
-        labelIsi.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        labelIsi.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         labelIsi.setText("jLabel2");
 
         labelImage.setText("jLabel2");
@@ -72,6 +74,8 @@ public class DetailPengaduan extends javax.swing.JFrame {
 
         labelNoTelp.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         labelNoTelp.setText("jLabel6");
+
+        btBeriTanggapan.setText("Beri Tanggapan");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,6 +105,10 @@ public class DetailPengaduan extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelNoTelp)))
                 .addContainerGap(384, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btBeriTanggapan)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +133,9 @@ public class DetailPengaduan extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(labelImage))
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                .addComponent(btBeriTanggapan)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -146,6 +156,7 @@ public class DetailPengaduan extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -185,6 +196,7 @@ public class DetailPengaduan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btBeriTanggapan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -216,6 +228,10 @@ public class DetailPengaduan extends javax.swing.JFrame {
     
     public JLabel getLabelImage() {
         return labelImage;
+    }
+    
+    public JButton getButtonTanggapan() {
+        return btBeriTanggapan;
     }
     
     public void showAlert(String alert) {

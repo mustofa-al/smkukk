@@ -5,6 +5,7 @@
  */
 package config;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
  *
  * @author A
  */
-public class DateConverter {
+public class DateTools {
     public String getMySqlDateNow() {
         Date now = new Date();
         String pattern = "yyyy-MM-dd";

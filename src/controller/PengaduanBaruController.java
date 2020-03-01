@@ -5,7 +5,7 @@
  */
 package controller;
 
-import config.DateConverter;
+import config.DateTools;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -45,7 +45,7 @@ public class PengaduanBaruController {
         pengaduanBaruView.getButtonKirim().addActionListener((ae) -> {
             if (isValidForm()) {
                 Pengaduan pengaduan = new Pengaduan();
-                pengaduan.setDate(new DateConverter().getMySqlDateNow());
+                pengaduan.setDate(new DateTools().getMySqlDateNow());
                 pengaduan.setNik(pelapor.getNik());
                 pengaduan.setIsiLaporan(pengaduanBaruView.getFieldLaporan().getText());
                 if (pengaduanBaruView.getFileToUpload() != null) {
