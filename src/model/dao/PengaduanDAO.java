@@ -63,7 +63,7 @@ public class PengaduanDAO {
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             ResultSet result = statement.executeQuery(query);
-            while (result.next()) {
+            if (result.next()) {
                 Pengaduan pengaduan = new Pengaduan();
                 pengaduan.setId(result.getInt("id_pengaduan"));
                 pengaduan.setDate(result.getString("tgl_pengaduan"));
@@ -72,6 +72,8 @@ public class PengaduanDAO {
                 pengaduan.getPelapor().setNama(result.getString("nama"));
                 listPengaduan.add(pengaduan);
                 callback.onSuccess(listPengaduan);
+            } else {
+                callback.onFailure(null);
             }
         } catch (SQLException e) {
             Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, null, e);
@@ -112,6 +114,7 @@ public class PengaduanDAO {
         try {
             PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
             statement.setInt(1, pengaduanId);
+            Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, query);
             statement.executeUpdate();
             statement.close();
             callback.onSuccess();

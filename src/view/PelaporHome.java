@@ -53,10 +53,7 @@ public class PelaporHome extends javax.swing.JFrame {
 
         tabelTanggapan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Tanggal", "Tanggapan", "Pada Laporan", "Petugas"

@@ -54,10 +54,7 @@ public class PetugasHome extends javax.swing.JFrame {
 
         tabelPengaduan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Tanggal Pengaduan", "Isi Pengaduan", "Oleh"

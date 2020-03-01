@@ -58,7 +58,13 @@ public class PelaporHomeController {
                 Point point = mouseEvent.getPoint();
                 int row = table.rowAtPoint(point);
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-                    new DetailTanggapanController(new DetailTanggapan(),  pelapor, listTanggapan.get(row));
+                    new DetailTanggapanController(new DetailTanggapan(),  pelapor, listTanggapan.get(row))
+                            .listener = new DetailTanggapanController.Listener() {
+                        @Override
+                        public void onDisposed() {
+                            initData();
+                        }
+                    };
                 }
             }
         });
@@ -73,16 +79,16 @@ public class PelaporHomeController {
             @Override
             public void onSuccess(List<Tanggapan> data) {
                 listTanggapan = data;
-                if (data.size() != 0) {
-                    pelaporHomeView.getTabelTanggapan().setModel(new TabelModelTanggapan(data));
-                } else {
-                    pelaporHomeView.showAlert("Belum ada data!");
-                }
+                pelaporHomeView.getTabelTanggapan().setModel(new TabelModelTanggapan(data));
             }
 
             @Override
             public void onFailure(SQLException e) {
-                pelaporHomeView.showAlert("Gagal memuat tanggapan!");
+                if (e!= null) {
+                    pelaporHomeView.showAlert("Gagal memuat tanggapan!");
+                } else {
+                    pelaporHomeView.showAlert("Belum ada data untuk ditampilkan!");
+                }
             }
         });
     }

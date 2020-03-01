@@ -25,6 +25,7 @@ public class DetailTanggapanController {
     private Tanggapan tanggapan;
     private TanggapanDAO tanggapanDAO;
     private PengaduanDAO pengaduanDAO;
+    Listener listener;
 
     public DetailTanggapanController(DetailTanggapan detailTanggapanView, Pelapor pelapor, Tanggapan tanggapan) {
         this.detailTanggapanView = detailTanggapanView;
@@ -52,6 +53,7 @@ public class DetailTanggapanController {
                 public void onSuccess() {
                     detailTanggapanView.showAlert("Pengaduan selesai!");
                     detailTanggapanView.dispose();
+                    listener.onDisposed();
                 }
 
                 @Override
@@ -66,6 +68,7 @@ public class DetailTanggapanController {
         tanggapanDAO.getDetailTanggapan(tanggapan.getTanggapanId(), pelapor, new ResultDataListener<Tanggapan>() {
             @Override
             public void onSuccess(Tanggapan data) {
+                tanggapan = data;
                 detailTanggapanView.setTitle("Tanggapan oleh Petugas: "+data.getPetugas().getNama());
                 detailTanggapanView.getLabelPetugas().setText(data.getPetugas().getNama());
                 detailTanggapanView.getLabelTanggal().setText(data.getDate());
@@ -80,5 +83,9 @@ public class DetailTanggapanController {
         });
     }
     
-    
+    public interface Listener {
+
+        public void onDisposed();
+        
+    }
 }

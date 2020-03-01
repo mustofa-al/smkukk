@@ -61,16 +61,16 @@ public class PetugasHomeController {
             @Override
             public void onSuccess(List<Pengaduan> data) {
                 listPengaduan = data;
-                if (data.size() != 0) {
-                    petugasHomeView.getTabelPengaduan().setModel(new TabelModelPengaduan(data));
-                } else {
-                    petugasHomeView.showAlert("Belum ada data untuk ditampilkan!");
-                }
+                petugasHomeView.getTabelPengaduan().setModel(new TabelModelPengaduan(data));
             }
 
             @Override
             public void onFailure(SQLException e) {
-                petugasHomeView.showErrorAlert("Gagal memuat data Pengaduan!");
+                if (e != null) {
+                    petugasHomeView.showErrorAlert("Gagal memuat data Pengaduan!");
+                } else {
+                    petugasHomeView.showAlert("Belum ada data untuk ditampilkan!");
+                }
             }
         });
     }
