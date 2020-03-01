@@ -28,13 +28,13 @@ import view.TanggapanBaru;
  */
 public class DetailPengaduanController {
     private DetailPengaduan detailPengaduanView;
-    private int pengajuanId;
+    private int pengaduanId;
     private Petugas petugas;
     private PengaduanDAO pengaduanDAO;
 
-    public DetailPengaduanController(DetailPengaduan detailPengaduanView, int pengajuanId, Petugas petugas) {
+    public DetailPengaduanController(DetailPengaduan detailPengaduanView, int pengaduanId, Petugas petugas) {
         this.detailPengaduanView = detailPengaduanView;
-        this.pengajuanId = pengajuanId;
+        this.pengaduanId = pengaduanId;
         this.petugas = petugas;
         initDao();
         initView();
@@ -47,7 +47,7 @@ public class DetailPengaduanController {
     }
 
     private void initData() {
-        pengaduanDAO.getDetailPengaduan(pengajuanId, new ResultDataListener<Pengaduan>(){
+        pengaduanDAO.getDetailPengaduan(pengaduanId, new ResultDataListener<Pengaduan>(){
             @Override
             public void onSuccess(Pengaduan data) {
                 detailPengaduanView.setTitle("Pengaduan oleh "+data.getPelapor().getNama());
@@ -55,16 +55,20 @@ public class DetailPengaduanController {
                 detailPengaduanView.getLabelTanggal().setText(data.getDate());
                 detailPengaduanView.getLabelNoTelp().setText(data.getPelapor().getTelp());
                 detailPengaduanView.getLabelIsiLaporan().setText(data.getIsiLaporan());
-                BufferedImage bi = null;
-                try {
-                    bi = ImageIO.read(new FileHelper().byteToInputStream(data.getFoto()));
-                } catch (IOException ex) {
-                    Logger.getLogger(DetailPengaduanController.class.getName()).log(Level.SEVERE, null, ex);
+                if (data.getFoto() != null) {
+                    BufferedImage bi = null;
+                    try {
+                        bi = ImageIO.read(new FileHelper().byteToInputStream(data.getFoto()));
+                    } catch (IOException ex) {
+                        Logger.getLogger(DetailPengaduanController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Image imagedResized = bi.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
+                    ImageIcon icon = new ImageIcon(imagedResized);
+                    detailPengaduanView.getLabelImage().setIcon(icon);
+                    detailPengaduanView.getLabelImage().setText("");
+                } else {
+                    detailPengaduanView.getLabelImage().setText("Tidak menyertakan foto");
                 }
-                Image imagedResized = bi.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
-                ImageIcon icon = new ImageIcon(imagedResized);
-                detailPengaduanView.getLabelImage().setIcon(icon);
-                detailPengaduanView.getLabelImage().setText("");
             }
 
             @Override
@@ -81,7 +85,7 @@ public class DetailPengaduanController {
 
     private void initListener() {
         detailPengaduanView.getButtonTanggapan().addActionListener((ae) -> {
-            new TanggapanBaruController(new TanggapanBaru(), pengajuanId, petugas);
+            new TanggapanBaruController(new TanggapanBaru(), pengaduanId, petugas);
         });
     }
     

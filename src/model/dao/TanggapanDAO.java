@@ -59,11 +59,38 @@ public class TanggapanDAO {
                 tanggapan.setDate(result.getString("tgl_tanggapan"));
                 tanggapan.setIsiTanggapan(result.getString("tanggapan"));
                 tanggapan.setPengaduan(new Pengaduan());
-                tanggapan.getPengaduan().setIsiLaporan("isi_laporan");
+                tanggapan.getPengaduan().setIsiLaporan(result.getString("isi_laporan"));
                 tanggapan.setPetugas(new Petugas());
                 tanggapan.getPetugas().setNama(result.getString("nama_petugas"));
                 listTanggapan.add(tanggapan);
                 callback.onSuccess(listTanggapan);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, null, e);
+            callback.onFailure(e);
+        }
+    }
+
+    public void getDetailTanggapan(int tanggapanId, Pelapor pelapor, ResultDataListener<Tanggapan> callback) {
+        String query = "SELECT tanggapan.id_tanggapan, tanggapan.tgl_tanggapan, tanggapan.tanggapan, pengaduan.isi_laporan,"
+                + " petugas.nama_petugas FROM pengaduan, tanggapan, petugas, masyarakat "
+                + "WHERE tanggapan.id_tanggapan = "+tanggapanId+" AND tanggapan.id_pengaduan = pengaduan.id_pengaduan "
+                + "AND masyarakat.nik = '"+pelapor.getNik()+"'";
+        try {
+            Statement statement = DBConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query);
+            if (result.next()) {
+                Tanggapan tanggapan = new Tanggapan();
+                tanggapan.setTanggapanId(result.getInt("id_tanggapan"));
+                tanggapan.setDate(result.getString("tgl_tanggapan"));
+                tanggapan.setIsiTanggapan(result.getString("tanggapan"));
+                tanggapan.setPengaduan(new Pengaduan());
+                tanggapan.getPengaduan().setIsiLaporan(result.getString("isi_laporan"));
+                tanggapan.setPetugas(new Petugas());
+                tanggapan.getPetugas().setNama(result.getString("nama_petugas"));
+                callback.onSuccess(tanggapan);
+            } else {
+                callback.onFailure(null);
             }
         } catch (SQLException e) {
             Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, null, e);
