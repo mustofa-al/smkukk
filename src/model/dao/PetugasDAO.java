@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Pelapor;
+import model.Petugas;
 import model.db.DBConnection;
 
 /**
@@ -19,13 +20,18 @@ import model.db.DBConnection;
  * @author A
  */
 public class PetugasDAO {
-    public void login(String username, String password, ResultListener callback) {
+    public void login(String username, String password, ResultDataListener<Petugas> callback) {
         String query = "SELECT * FROM petugas WHERE username = '"+username+"' AND password = "+password;
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             ResultSet result = statement.executeQuery(query);
             if (result.next()) {
-                callback.onSuccess();
+                Petugas petugas = new Petugas();
+                petugas.setId(result.getInt("id_petugas"));
+                petugas.setNama(result.getString("nama_petugas"));
+                petugas.setUsername(result.getString("username"));
+                petugas.setTelp(result.getString("telp"));
+                callback.onSuccess(petugas);
             } else {
                 callback.onFailure(null);
             }

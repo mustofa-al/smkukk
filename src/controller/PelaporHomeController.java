@@ -27,10 +27,11 @@ public class PelaporHomeController {
 
     private void initView() {
         pelaporHomeView.setVisible(true);
+        pelaporHomeView.getLabelInfo().setText("Login sebagai: "+pelapor.getNama());
     }
 
     private void initListeners() {
-        pelaporHomeView.getButtonLaporanBaru().addActionListener((ae) -> {
+        pelaporHomeView.getMenuPengaduanBaru().addActionListener((ae) -> {
             PengaduanBaru pengaduanBaru = new PengaduanBaru();
             pengaduanBaru.listener = new PengaduanBaru.Listener() {
                 @Override

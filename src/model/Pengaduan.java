@@ -15,6 +15,7 @@ public class Pengaduan {
     private int id;
     private String date;
     private String nik;
+    private Pelapor pelapor;
     private String isiLaporan;
     private File foto;
     private StatusPengaduan status;
@@ -29,6 +30,10 @@ public class Pengaduan {
 
     public String getNik() {
         return nik;
+    }
+
+    public Pelapor getPelapor() {
+        return pelapor;
     }
 
     public String getIsiLaporan() {
@@ -53,6 +58,10 @@ public class Pengaduan {
 
     public void setNik(String nik) {
         this.nik = nik;
+    }
+
+    public void setPelapor(Pelapor pelapor) {
+        this.pelapor = pelapor;
     }
 
     public void setIsiLaporan(String isiLaporan) {

@@ -5,10 +5,13 @@
  */
 package controller;
 import java.sql.SQLException;
+import model.Petugas;
 import model.dao.PelaporDAO;
 import model.dao.PetugasDAO;
+import model.dao.ResultDataListener;
 import model.dao.ResultListener;
 import view.LoginPetugas;
+import view.PetugasHome;
 
 /**
  *
@@ -39,10 +42,11 @@ public class LoginPetugasController {
                 petugasDAO.login(
                         loginPetugasView.getFieldUsername().getText().toString(),
                         loginPetugasView.getFieldPassword().getText().toString(), 
-                        new ResultListener() {
+                        new ResultDataListener<Petugas>() {
                     @Override
-                    public void onSuccess() {
-                        loginPetugasView.showAlert("success");
+                    public void onSuccess(Petugas petugas) {
+                        new PetugasHomeController(new PetugasHome(), petugas);
+                        loginPetugasView.dispose();
                     }
 
                     @Override

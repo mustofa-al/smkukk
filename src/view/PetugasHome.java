@@ -5,21 +5,19 @@
  */
 package view;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenuItem;
 
 /**
  *
  * @author A
  */
-public class PelaporHome extends javax.swing.JFrame {
+public class PetugasHome extends javax.swing.JFrame {
 
     /**
-     * Creates new form PelaporHome
+     * Creates new form PetugasHome
      */
-    public PelaporHome() {
+    public PetugasHome() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
@@ -35,19 +33,22 @@ public class PelaporHome extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         lbInfo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        menuPengaduanBaru = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menuTanggapanSaya = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menuBuatLaporan = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Pelapor | Pelaporan Pengaduan Masyarakat");
+        setTitle("Petugas | Pelaporan Pengaduan Masyarakat");
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel1.setText("Tanggapan");
+        jLabel1.setText("Pengaduan untuk Ditanggapi");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -57,11 +58,11 @@ public class PelaporHome extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Tanggal", "Tanggapan", "Petugas"
+                "Tanggal Pengaduan", "Isi Pengaduan", "Oleh"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false
@@ -75,10 +76,10 @@ public class PelaporHome extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable1);
 
         lbInfo.setFont(new java.awt.Font("SansSerif", 0, 10)); // NOI18N
-        lbInfo.setText("Login sebagai:");
+        lbInfo.setText("Login Sebagai:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,33 +88,44 @@ public class PelaporHome extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbInfo)))
+                        .addComponent(lbInfo))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lbInfo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Pengaduan");
+        jMenu1.setText("Tanggapan");
 
-        menuPengaduanBaru.setText("Buat Pengaduan Baru");
-        jMenu1.add(menuPengaduanBaru);
-
-        jMenuItem2.setText("Riwayat Pengaduan Saya");
-        jMenu1.add(jMenuItem2);
+        menuTanggapanSaya.setText("Tanggapan oleh Saya");
+        jMenu1.add(menuTanggapanSaya);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Pengaduan");
+
+        jMenuItem1.setText("Pengaduan Selesai");
+        jMenu3.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu2.setText("Laporan");
+
+        menuBuatLaporan.setText("Buat Laporan");
+        jMenu2.add(menuBuatLaporan);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -150,20 +162,20 @@ public class PelaporHome extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PelaporHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PetugasHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PelaporHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PetugasHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PelaporHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PetugasHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PelaporHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PetugasHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PelaporHome().setVisible(true);
+                new PetugasHome().setVisible(true);
             }
         });
     }
@@ -171,19 +183,18 @@ public class PelaporHome extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbInfo;
-    private javax.swing.JMenuItem menuPengaduanBaru;
+    private javax.swing.JMenuItem menuBuatLaporan;
+    private javax.swing.JMenuItem menuTanggapanSaya;
     // End of variables declaration//GEN-END:variables
 
-    public JMenuItem getMenuPengaduanBaru() {
-        return menuPengaduanBaru;
-    }
-    
     public JLabel getLabelInfo() {
         return lbInfo;
     }

@@ -46,6 +46,9 @@ public class PelaporDAO {
             if (result.next()) {
                 Pelapor pelapor = new Pelapor();
                 pelapor.setNik(result.getString("nik"));
+                pelapor.setNama(result.getString("nama"));
+                pelapor.setUsername(result.getString("username"));
+                pelapor.setTelp(result.getString("telp"));
                 callback.onSuccess(pelapor);
             } else {
                 callback.onFailure(null);
