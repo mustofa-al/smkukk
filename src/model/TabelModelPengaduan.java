@@ -40,5 +40,14 @@ public class TabelModelPengaduan extends AbstractTableModel{
                 default:return null;
         }
     }
-    
+
+    @Override
+    public String getColumnName(int columnIndex) {
+        switch (columnIndex) {
+            case 0 : return "Tanggal Pengaduan";
+            case 1 : return "Isi Pengaduan";
+            case 2 : return "Pelapor";
+                default:return null;
+        }
+    }
 }

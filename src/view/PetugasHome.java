@@ -7,6 +7,8 @@ package view;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -34,7 +36,7 @@ public class PetugasHome extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelPengaduan = new javax.swing.JTable();
         lbInfo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -50,7 +52,7 @@ public class PetugasHome extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel1.setText("Pengaduan untuk Ditanggapi");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelPengaduan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -76,7 +78,7 @@ public class PetugasHome extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelPengaduan);
 
         lbInfo.setFont(new java.awt.Font("SansSerif", 0, 10)); // NOI18N
         lbInfo.setText("Login Sebagai:");
@@ -189,13 +191,25 @@ public class PetugasHome extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbInfo;
     private javax.swing.JMenuItem menuBuatLaporan;
     private javax.swing.JMenuItem menuTanggapanSaya;
+    private javax.swing.JTable tabelPengaduan;
     // End of variables declaration//GEN-END:variables
 
     public JLabel getLabelInfo() {
         return lbInfo;
+    }
+    
+    public void showAlert(String alert) {
+        JOptionPane.showMessageDialog(this, alert);
+    }
+    
+    public void showErrorAlert(String alert) {
+        JOptionPane.showMessageDialog(this, alert, "Error!", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public JTable getTabelPengaduan() {
+        return tabelPengaduan;
     }
 }

@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Pelapor;
@@ -51,6 +53,28 @@ public class PengaduanDAO {
             callback.onSuccess();
         } catch (SQLException e) {
             Logger.getLogger(PengaduanDAO.class.getName()).log(Level.SEVERE, null, e);
+            callback.onFailure(e);
+        }
+    }
+
+    public void getData(ResultDataListener<List<Pengaduan>> callback) {
+        String query = "SELECT pengaduan.id_pengaduan, pengaduan.tgl_pengaduan, pengaduan.isi_laporan, masyarakat.nama FROM pengaduan, masyarakat WHERE pengaduan.status = 'terkirim'";
+        List<Pengaduan> listPengaduan = new ArrayList<Pengaduan>();
+        try {
+            Statement statement = DBConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query);
+            while (result.next()) {
+                Pengaduan pengaduan = new Pengaduan();
+                pengaduan.setId(result.getInt("id_pengaduan"));
+                pengaduan.setDate(result.getString("tgl_pengaduan"));
+                pengaduan.setIsiLaporan(result.getString("isi_laporan"));
+                pengaduan.setPelapor(new Pelapor());
+                pengaduan.getPelapor().setNama(result.getString("nama"));
+                listPengaduan.add(pengaduan);
+                callback.onSuccess(listPengaduan);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, null, e);
             callback.onFailure(e);
         }
     }

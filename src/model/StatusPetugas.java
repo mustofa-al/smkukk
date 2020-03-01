@@ -10,6 +10,6 @@ package model;
  * @author A
  */
 public enum StatusPetugas {
-    ADMIN,
-    PETUGAS
+    admin,
+    petugas
 }
