@@ -23,7 +23,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class PengaduanBaru extends javax.swing.JFrame {
     private File file;
     private JFileChooser jfc;
-    public Listener listener;
 
     /**
      * Creates new form LaporanBaru
@@ -131,7 +130,6 @@ public class PengaduanBaru extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        listener.onDisposed();
     }//GEN-LAST:event_formWindowClosed
 
     /**
@@ -197,11 +195,5 @@ public class PengaduanBaru extends javax.swing.JFrame {
     
     public void showErrorAlert(String alert) {
         JOptionPane.showMessageDialog(this, alert, "Error!", JOptionPane.ERROR_MESSAGE);
-    }
-    
-    public interface Listener {
-
-        public void onDisposed();
-        
     }
 }

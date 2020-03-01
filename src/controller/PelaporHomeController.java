@@ -5,8 +5,14 @@
  */
 package controller;
 
+import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Logger;
 import model.Pelapor;
+import model.TabelModelTanggapan;
+import model.Tanggapan;
+import model.dao.ResultDataListener;
+import model.dao.TanggapanDAO;
 import view.PelaporHome;
 import view.PengaduanBaru;
 
@@ -17,12 +23,15 @@ import view.PengaduanBaru;
 public class PelaporHomeController {
     private PelaporHome pelaporHomeView;
     private Pelapor pelapor;
+    private TanggapanDAO tanggapanDAO;
 
     public PelaporHomeController(PelaporHome pelaporHome, Pelapor pelapor) {
         this.pelaporHomeView = pelaporHome;
         this.pelapor = pelapor;
+        initDAO();
         initView();
         initListeners();
+        initData();
     }
 
     private void initView() {
@@ -33,13 +42,25 @@ public class PelaporHomeController {
     private void initListeners() {
         pelaporHomeView.getMenuPengaduanBaru().addActionListener((ae) -> {
             PengaduanBaru pengaduanBaru = new PengaduanBaru();
-            pengaduanBaru.listener = new PengaduanBaru.Listener() {
-                @Override
-                public void onDisposed() {
-                    // reload list
-                }
-            };
             new PengaduanBaruController(pengaduanBaru, pelapor);
+        });
+    }
+
+    private void initDAO() {
+        tanggapanDAO = new TanggapanDAO();
+    }
+
+    private void initData() {
+        tanggapanDAO.getData(pelapor, new ResultDataListener<List<Tanggapan>>() {
+            @Override
+            public void onSuccess(List<Tanggapan> data) {
+                pelaporHomeView.getTabelTanggapan().setModel(new TabelModelTanggapan(data));
+            }
+
+            @Override
+            public void onFailure(SQLException e) {
+                pelaporHomeView.showAlert("Gagal memuat tanggapan!");
+            }
         });
     }
 }

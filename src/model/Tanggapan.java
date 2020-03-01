@@ -15,6 +15,8 @@ public class Tanggapan {
     String date;
     String isiTanggapan;
     int petugasId;
+    Petugas petugas;
+    Pengaduan pengaduan;
 
     public int getTanggapanId() {
         return tanggapanId;
@@ -54,6 +56,22 @@ public class Tanggapan {
 
     public void setPetugasId(int petugasId) {
         this.petugasId = petugasId;
+    }
+
+    public Petugas getPetugas() {
+        return petugas;
+    }
+
+    public void setPetugas(Petugas petugas) {
+        this.petugas = petugas;
+    }
+
+    public Pengaduan getPengaduan() {
+        return pengaduan;
+    }
+
+    public void setPengaduan(Pengaduan pengaduan) {
+        this.pengaduan = pengaduan;
     }
     
     

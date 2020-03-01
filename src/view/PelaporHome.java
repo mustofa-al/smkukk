@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -36,7 +38,7 @@ public class PelaporHome extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelTanggapan = new javax.swing.JTable();
         lbInfo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -49,22 +51,22 @@ public class PelaporHome extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel1.setText("Tanggapan");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelTanggapan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Tanggal", "Tanggapan", "Petugas"
+                "Tanggal", "Tanggapan", "Pada Laporan", "Petugas"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -75,7 +77,7 @@ public class PelaporHome extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tabelTanggapan);
 
         lbInfo.setFont(new java.awt.Font("SansSerif", 0, 10)); // NOI18N
         lbInfo.setText("Login sebagai:");
@@ -175,9 +177,9 @@ public class PelaporHome extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbInfo;
     private javax.swing.JMenuItem menuPengaduanBaru;
+    private javax.swing.JTable tabelTanggapan;
     // End of variables declaration//GEN-END:variables
 
     public JMenuItem getMenuPengaduanBaru() {
@@ -186,5 +188,17 @@ public class PelaporHome extends javax.swing.JFrame {
     
     public JLabel getLabelInfo() {
         return lbInfo;
+    }
+    
+    public JTable getTabelTanggapan() {
+        return tabelTanggapan;
+    }
+    
+    public void showAlert(String alert) {
+        JOptionPane.showMessageDialog(this, alert);
+    }
+    
+    public void showErrorAlert(String alert) {
+        JOptionPane.showMessageDialog(this, alert, "Error!", JOptionPane.ERROR_MESSAGE);
     }
 }
