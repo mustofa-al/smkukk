@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.util.logging.Logger;
 import model.Pelapor;
 import view.PelaporHome;
 import view.PengaduanBaru;
@@ -30,7 +31,14 @@ public class PelaporHomeController {
 
     private void initListeners() {
         pelaporHomeView.getButtonLaporanBaru().addActionListener((ae) -> {
-            new PengaduanBaruController(new PengaduanBaru(), pelapor);
+            PengaduanBaru pengaduanBaru = new PengaduanBaru();
+            pengaduanBaru.listener = new PengaduanBaru.Listener() {
+                @Override
+                public void onDisposed() {
+                    // reload list
+                }
+            };
+            new PengaduanBaruController(pengaduanBaru, pelapor);
         });
     }
 }

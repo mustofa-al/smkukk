@@ -12,6 +12,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -19,8 +21,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author A
  */
 public class PengaduanBaru extends javax.swing.JFrame {
-    File file;
-    JFileChooser jfc;
+    private File file;
+    private JFileChooser jfc;
+    public Listener listener;
 
     /**
      * Creates new form LaporanBaru
@@ -40,19 +43,24 @@ public class PengaduanBaru extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        taLaporan = new javax.swing.JTextArea();
         btUpload = new javax.swing.JButton();
         labelImage = new javax.swing.JLabel();
         btKirim = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pengaduan Baru | Pelaporan Pengaduan Masyarakat");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setText("Laporan");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        taLaporan.setColumns(20);
+        taLaporan.setRows(5);
+        jScrollPane1.setViewportView(taLaporan);
 
         btUpload.setText("Lampirkan Gambar");
         btUpload.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +129,11 @@ public class PengaduanBaru extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btUploadActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        listener.onDisposed();
+    }//GEN-LAST:event_formWindowClosed
+
     /**
      * @param args the command line arguments
      */
@@ -162,11 +175,33 @@ public class PengaduanBaru extends javax.swing.JFrame {
     private javax.swing.JButton btUpload;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel labelImage;
+    private javax.swing.JTextArea taLaporan;
     // End of variables declaration//GEN-END:variables
 
     public JButton getButtonKirim() {
         return btKirim;
+    }
+    
+    public JTextArea getFieldLaporan() {
+        return taLaporan;
+    }
+    
+    public File getFileToUpload() {
+        return file;
+    }
+    
+    public void showAlert(String alert) {
+        JOptionPane.showMessageDialog(this, alert);
+    }
+    
+    public void showErrorAlert(String alert) {
+        JOptionPane.showMessageDialog(this, alert, "Error!", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public interface Listener {
+
+        public void onDisposed();
+        
     }
 }
