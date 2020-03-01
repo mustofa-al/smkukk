@@ -10,7 +10,7 @@ package model;
  * @author A
  */
 public enum StatusPengaduan {
-    TERKIRIM,
-    DIPROSES,
-    SELESAI
+    terkirim,
+    diproses,
+    selesai
 }

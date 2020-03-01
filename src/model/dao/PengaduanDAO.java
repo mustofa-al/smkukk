@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Pelapor;
 import model.Pengaduan;
+import model.StatusPengaduan;
 import model.db.DBConnection;
 
 /**
@@ -103,6 +104,19 @@ public class PengaduanDAO {
         } catch (SQLException e) {
             Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, null, e);
             callback.onFailure(e);
+        }
+    }
+    
+    public void setStatusPengaduan(int pengaduanId, StatusPengaduan status, ResultListener callback) {
+        String query = "UPDATE pengaduan SET status = '"+status+"' WHERE id_pengaduan=?";
+        try {
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
+            statement.setInt(1, pengaduanId);
+            statement.executeUpdate();
+            statement.close();
+            callback.onSuccess();
+        } catch (SQLException ex) {
+            Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

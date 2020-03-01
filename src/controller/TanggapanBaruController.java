@@ -8,7 +8,9 @@ package controller;
 import config.DateTools;
 import java.sql.SQLException;
 import model.Petugas;
+import model.StatusPengaduan;
 import model.Tanggapan;
+import model.dao.PengaduanDAO;
 import model.dao.ResultListener;
 import model.dao.TanggapanDAO;
 import view.DetailPengaduan;
@@ -23,6 +25,7 @@ public class TanggapanBaruController {
     private int pengaduanId;
     private Petugas petugas;
     private TanggapanDAO tanggapanDAO;
+    private PengaduanDAO pengaduanDAO;
 
     public TanggapanBaruController(TanggapanBaru tanggapanBaruView, int pengaduanId, Petugas petugas) {
         this.tanggapanBaruView = tanggapanBaruView;
@@ -48,8 +51,18 @@ public class TanggapanBaruController {
                 tanggapanDAO.insert(tanggapan, new ResultListener() {
                     @Override
                     public void onSuccess() {
-                        tanggapanBaruView.showAlert("Berhasil mengirim tanggapan!");
-                        tanggapanBaruView.dispose();
+                        pengaduanDAO.setStatusPengaduan(pengaduanId, StatusPengaduan.diproses, new ResultListener() {
+                            @Override
+                            public void onSuccess() {
+                                tanggapanBaruView.showAlert("Berhasil mengirim tanggapan!");
+                                tanggapanBaruView.dispose();
+                            }
+
+                            @Override
+                            public void onFailure(SQLException e) {
+                                tanggapanBaruView.showErrorAlert("Gagal mengirim tanggapan!");
+                            }
+                        });
                     }
 
                     @Override
@@ -63,6 +76,7 @@ public class TanggapanBaruController {
 
     private void initDAO() {
         tanggapanDAO = new TanggapanDAO();
+        pengaduanDAO = new PengaduanDAO();
     }
 
     private boolean isValidInput() {

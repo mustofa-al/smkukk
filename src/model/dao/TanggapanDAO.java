@@ -48,7 +48,7 @@ public class TanggapanDAO {
         String query = "SELECT tanggapan.id_tanggapan, tanggapan.tgl_tanggapan, tanggapan.tanggapan, pengaduan.isi_laporan,"
                 + " petugas.nama_petugas FROM pengaduan, tanggapan, petugas, masyarakat "
                 + "WHERE tanggapan.id_pengaduan = pengaduan.id_pengaduan "
-                + "AND masyarakat.nik = '"+pelapor.getNik()+"'";
+                + "AND masyarakat.nik = '"+pelapor.getNik()+"'" +" AND pengaduan.status = 'diproses'";
         List<Tanggapan> listTanggapan = new ArrayList<Tanggapan>();
         try {
             Statement statement = DBConnection.getConnection().createStatement();
@@ -75,7 +75,7 @@ public class TanggapanDAO {
         String query = "SELECT tanggapan.id_tanggapan, tanggapan.tgl_tanggapan, tanggapan.tanggapan, pengaduan.isi_laporan,"
                 + " petugas.nama_petugas FROM pengaduan, tanggapan, petugas, masyarakat "
                 + "WHERE tanggapan.id_tanggapan = "+tanggapanId+" AND tanggapan.id_pengaduan = pengaduan.id_pengaduan "
-                + "AND masyarakat.nik = '"+pelapor.getNik()+"'";
+                + "AND masyarakat.nik = '"+pelapor.getNik()+"'" +" AND pengaduan.status = 'diproses'";
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             ResultSet result = statement.executeQuery(query);
