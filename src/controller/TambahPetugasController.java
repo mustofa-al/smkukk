@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Petugas;
+import model.StatusPetugas;
 import model.dao.PelaporDAO;
 import model.dao.PetugasDAO;
 import model.dao.ResultListener;
@@ -89,6 +90,11 @@ public class TambahPetugasController {
         tambahPetugasView.getFieldNamaPetugas().setText(petugas.getNama());
         tambahPetugasView.getFieldUsername().setText(petugas.getUsername());
         tambahPetugasView.getFieldTelp().setText(petugas.getTelp());
+        if (petugas.getStatus() == StatusPetugas.admin) {
+            tambahPetugasView.getComboBoxLevel().setSelectedIndex(0);
+        } else if (petugas.getStatus() == StatusPetugas.petugas) {
+            tambahPetugasView.getComboBoxLevel().setSelectedIndex(1);
+        }
     }
 
     private void createNew() {
@@ -97,6 +103,11 @@ public class TambahPetugasController {
         petugas.setUsername(tambahPetugasView.getFieldUsername().getText());
         petugas.setTelp(tambahPetugasView.getFieldTelp().getText());
         petugas.setPassword(tambahPetugasView.getFieldPassword().getText());
+        if (tambahPetugasView.getComboBoxLevel().getSelectedItem().toString() == "Admin") {
+            petugas.setStatus(StatusPetugas.admin);
+        } else if (tambahPetugasView.getComboBoxLevel().getSelectedItem().toString() == "Petugas"){
+            petugas.setStatus(StatusPetugas.petugas);
+        }
         petugasDAO.insert(petugas, new ResultListener() {
             @Override
             public void onSuccess() {
@@ -116,6 +127,11 @@ public class TambahPetugasController {
         petugas.setUsername(tambahPetugasView.getFieldUsername().getText());
         petugas.setTelp(tambahPetugasView.getFieldTelp().getText());
         petugas.setPassword(tambahPetugasView.getFieldPassword().getText());
+        if (tambahPetugasView.getComboBoxLevel().getSelectedItem().toString() == "Admin") {
+            petugas.setStatus(StatusPetugas.admin);
+        } else if (tambahPetugasView.getComboBoxLevel().getSelectedItem().toString() == "Petugas"){
+            petugas.setStatus(StatusPetugas.petugas);
+        }
         petugasDAO.update(petugas, new ResultListener() {
             @Override
             public void onSuccess() {

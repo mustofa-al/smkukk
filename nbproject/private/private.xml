@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/Java%20Apps/Pengaduan%20Masyarakat/src/view/DaftarPetugas.java</file>
+            <file>file:/D:/Java%20Apps/Pengaduan%20Masyarakat/src/view/RiwayatPengaduanSaya.java</file>
+            <file>file:/D:/Java%20Apps/Pengaduan%20Masyarakat/src/model/dao/PengaduanDAO.java</file>
+            <file>file:/D:/Java%20Apps/Pengaduan%20Masyarakat/src/view/TambahPetugas.java</file>
+            <file>file:/D:/Java%20Apps/Pengaduan%20Masyarakat/src/model/dao/PetugasDAO.java</file>
+            <file>file:/D:/Java%20Apps/Pengaduan%20Masyarakat/src/model/dao/TanggapanDAO.java</file>
+            <file>file:/D:/Java%20Apps/Pengaduan%20Masyarakat/src/controller/RiwayatPengaduanSayaController.java</file>
+            <file>file:/D:/Java%20Apps/Pengaduan%20Masyarakat/src/controller/TanggapanBaruController.java</file>
+            <file>file:/D:/Java%20Apps/Pengaduan%20Masyarakat/src/controller/DaftarPetugasController.java</file>
+            <file>file:/D:/Java%20Apps/Pengaduan%20Masyarakat/src/controller/ListTanggapanPetugasController.java</file>
+            <file>file:/D:/Java%20Apps/Pengaduan%20Masyarakat/src/controller/TambahPetugasController.java</file>
+        </group>
+    </open-files>
+</project-private>
