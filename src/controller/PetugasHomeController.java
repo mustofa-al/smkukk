@@ -22,6 +22,7 @@ import model.dao.PengaduanDAO;
 import model.dao.PetugasDAO;
 import model.dao.ResultDataListener;
 import view.DetailPengaduan;
+import view.ListTanggapanPetugas;
 import view.PengaduanBaru;
 import view.PengaduanSelesai;
 import view.PetugasHome;
@@ -107,6 +108,10 @@ public class PetugasHomeController {
         
         petugasHomeView.getMenuTambahPetugas().addActionListener((ae) -> {
             new TambahPetugasController(new TambahPetugas());
+        });
+        
+        petugasHomeView.getMenuTanggapanSaya().addActionListener((ae) -> {
+            new ListTanggapanPetugasController(new ListTanggapanPetugas(), petugas);
         });
     }
 

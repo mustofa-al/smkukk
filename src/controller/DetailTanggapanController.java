@@ -5,6 +5,7 @@
  */
 package controller;
 
+import com.sun.istack.internal.Nullable;
 import java.sql.SQLException;
 import model.Pelapor;
 import model.StatusPengaduan;
@@ -27,7 +28,7 @@ public class DetailTanggapanController {
     private PengaduanDAO pengaduanDAO;
     Listener listener;
 
-    public DetailTanggapanController(DetailTanggapan detailTanggapanView, Pelapor pelapor, Tanggapan tanggapan) {
+    public DetailTanggapanController(DetailTanggapan detailTanggapanView,@Nullable Pelapor pelapor, Tanggapan tanggapan) {
         this.detailTanggapanView = detailTanggapanView;
         this.pelapor = pelapor;
         this.tanggapan = tanggapan;
@@ -39,6 +40,11 @@ public class DetailTanggapanController {
 
     private void initView() {
         detailTanggapanView.setVisible(true);
+        if (pelapor==null) {
+            detailTanggapanView.getButtonSelesai().setVisible(false);
+        } else {
+            detailTanggapanView.getButtonSelesai().setVisible(true);
+        }
     }
 
     private void initDAO() {
