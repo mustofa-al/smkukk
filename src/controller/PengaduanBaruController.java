@@ -34,6 +34,7 @@ public class PengaduanBaruController {
     private Pelapor pelapor;
     private Pengaduan pengaduan;
     private PengaduanDAO pengaduanDAO;
+    Listener listener;
 
     public PengaduanBaruController(PengaduanBaru pengaduanBaruView, Pelapor pelapor) {
         this.pengaduanBaruView = pengaduanBaruView;
@@ -178,6 +179,7 @@ public class PengaduanBaruController {
             public void onSuccess() {
                 pengaduanBaruView.showAlert("Berhasil memperbarui pengaduan!");
                 pengaduanBaruView.dispose();
+                listener.onDisposed();
             }
 
             @Override
@@ -186,5 +188,11 @@ public class PengaduanBaruController {
             }
 
         });
+    }
+    
+    public interface Listener {
+
+        public void onDisposed();
+        
     }
 }

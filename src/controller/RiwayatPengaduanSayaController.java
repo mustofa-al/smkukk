@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import model.Pelapor;
 import model.Pengaduan;
@@ -17,6 +18,7 @@ import model.StatusPengaduan;
 import model.TabelModelPengaduanSaya;
 import model.dao.PengaduanDAO;
 import model.dao.ResultDataListener;
+import model.dao.ResultListener;
 import view.DetailPengaduan;
 import view.PengaduanBaru;
 import view.RiwayatPengaduanSaya;
@@ -90,10 +92,29 @@ public class RiwayatPengaduanSayaController {
             new DetailPengaduanController(new DetailPengaduan(), selected.getId(), null);
         });
         pengaduanSayaView.getButtonDelete().addActionListener((ae) -> {
-            // delete
+            int selection = pengaduanSayaView.showDeleteConfirmation();
+            if (selection==JOptionPane.YES_OPTION) {
+                pengaduanDAO.delete(selected, new ResultListener() {
+                    @Override
+                    public void onSuccess() {
+                        pengaduanSayaView.showAlert("Pengaduan terhapus!");
+                        initData();
+                    }
+
+                    @Override
+                    public void onFailure(SQLException e) {
+                        pengaduanSayaView.showErrorAlert("Gagal menghapus pengaduan!");
+                    }
+                });
+            }
         });
         pengaduanSayaView.getButtonEdit().addActionListener((ae) -> {
-            new PengaduanBaruController(new PengaduanBaru(), pelapor, selected);
+            new PengaduanBaruController(new PengaduanBaru(), pelapor, selected).listener = new PengaduanBaruController.Listener() {
+                @Override
+                public void onDisposed() {
+                    initData();
+                }
+            };
         });
     }
     

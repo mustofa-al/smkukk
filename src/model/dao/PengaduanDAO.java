@@ -179,4 +179,18 @@ public class PengaduanDAO {
             Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void delete(Pengaduan selected, ResultListener callback) {
+        String query = "DELETE FROM pengaduan WHERE id_pengaduan=?";
+        try {
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
+            statement.setInt(1, selected.getId());
+            statement.executeUpdate();
+            statement.close();
+            callback.onSuccess();
+        } catch (SQLException ex) {
+            callback.onFailure(ex);
+            Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

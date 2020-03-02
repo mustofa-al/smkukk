@@ -209,4 +209,10 @@ public class RiwayatPengaduanSaya extends javax.swing.JFrame {
     public void showErrorAlert(String alert) {
         JOptionPane.showMessageDialog(this, alert, "Error!", JOptionPane.ERROR_MESSAGE);
     }
+
+    public int showDeleteConfirmation() {
+        return  JOptionPane.showConfirmDialog(this, 
+                "Apakah Anda yakin?", "Hapus Pengaduan?", 
+                JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+    }
 }
