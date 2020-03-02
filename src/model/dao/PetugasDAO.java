@@ -90,4 +90,18 @@ public class PetugasDAO {
             callback.onFailure(e);
         }
     }
+
+    public void delete(int id, ResultListener callback) {
+        String query = "DELETE FROM petugas WHERE id_petugas=?";
+        try {
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            statement.close();
+            callback.onSuccess();
+        } catch (SQLException ex) {
+            callback.onFailure(ex);
+            Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

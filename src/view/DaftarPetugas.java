@@ -38,7 +38,6 @@ public class DaftarPetugas extends javax.swing.JFrame {
         tabelPetugas = new javax.swing.JTable();
         btHapus = new javax.swing.JButton();
         btUbah = new javax.swing.JButton();
-        btLihatDetail = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Daftar Petugas  | Pelaporan Pengaduan Masyarakat");
@@ -77,9 +76,6 @@ public class DaftarPetugas extends javax.swing.JFrame {
         btUbah.setText("Ubah");
         btUbah.setEnabled(false);
 
-        btLihatDetail.setText("Lihat Detail");
-        btLihatDetail.setEnabled(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,11 +86,9 @@ public class DaftarPetugas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 139, Short.MAX_VALUE)
-                        .addComponent(btLihatDetail)
-                        .addGap(18, 18, 18)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btUbah)
                         .addGap(18, 18, 18)
                         .addComponent(btHapus)))
@@ -110,8 +104,7 @@ public class DaftarPetugas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btHapus)
-                    .addComponent(btUbah)
-                    .addComponent(btLihatDetail))
+                    .addComponent(btUbah))
                 .addContainerGap())
         );
 
@@ -156,7 +149,6 @@ public class DaftarPetugas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btHapus;
-    private javax.swing.JButton btLihatDetail;
     private javax.swing.JButton btUbah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -175,15 +167,17 @@ public class DaftarPetugas extends javax.swing.JFrame {
         return btUbah;
     }
     
-    public JButton getButtonLihatDetail() {
-        return btLihatDetail;
-    }
-    
     public void showAlert(String alert) {
         JOptionPane.showMessageDialog(this, alert);
     }
     
     public void showErrorAlert(String alert) {
         JOptionPane.showMessageDialog(this, alert, "Error!", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public int showDeleteConfirmation() {
+        return  JOptionPane.showConfirmDialog(this, 
+                "Apakah Anda yakin?", "Hapus Petugas?", 
+                JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
     }
 }
