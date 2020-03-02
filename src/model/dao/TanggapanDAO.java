@@ -48,7 +48,8 @@ public class TanggapanDAO {
         String query = "SELECT tanggapan.id_tanggapan, tanggapan.tgl_tanggapan, tanggapan.tanggapan, pengaduan.isi_laporan,"
                 + " petugas.nama_petugas FROM pengaduan, tanggapan, petugas, masyarakat "
                 + "WHERE tanggapan.id_pengaduan = pengaduan.id_pengaduan "
-                + "AND masyarakat.nik = '"+pelapor.getNik()+"'" +" AND pengaduan.status = 'diproses'";
+                + "AND masyarakat.nik = '"+pelapor.getNik()+"'" +" AND pengaduan.status = 'diproses'"
+                + " ORDER BY tanggapan.id_tanggapan DESC";
         List<Tanggapan> listTanggapan = new ArrayList<Tanggapan>();
         try {
             Statement statement = DBConnection.getConnection().createStatement();

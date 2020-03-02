@@ -58,7 +58,9 @@ public class PengaduanDAO {
     }
 
     public void getData(ResultDataListener<List<Pengaduan>> callback) {
-        String query = "SELECT pengaduan.id_pengaduan, pengaduan.tgl_pengaduan, pengaduan.isi_laporan, masyarakat.nama FROM pengaduan, masyarakat WHERE pengaduan.status = 'terkirim'";
+        String query = "SELECT pengaduan.id_pengaduan, pengaduan.tgl_pengaduan, "
+                + "pengaduan.isi_laporan, masyarakat.nama FROM pengaduan, masyarakat"
+                + " WHERE pengaduan.status = 'terkirim' ORDER BY pengaduan.id_pengaduan DESC";
         List<Pengaduan> listPengaduan = new ArrayList<Pengaduan>();
         try {
             Statement statement = DBConnection.getConnection().createStatement();
@@ -127,7 +129,7 @@ public class PengaduanDAO {
     
     public void getData(String nik, ResultDataListener<List<Pengaduan>> callback) {
         String query = "SELECT pengaduan.id_pengaduan, pengaduan.tgl_pengaduan, pengaduan.isi_laporan, pengaduan.status"
-                + " FROM pengaduan, masyarakat WHERE pengaduan.nik = '"+nik+"'";
+                + " FROM pengaduan, masyarakat WHERE pengaduan.nik = '"+nik+"' ORDER BY pengaduan.id_pengaduan DESC";
         List<Pengaduan> listPengaduan = new ArrayList<Pengaduan>();
         try {
             Statement statement = DBConnection.getConnection().createStatement();
