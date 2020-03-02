@@ -38,9 +38,9 @@ public class TabelModelPengaduanSaya extends AbstractTableModel{
             case 1 : return list.get(rowIndex).getIsiLaporan();
             case 2 : {
                 if (list.get(rowIndex).getStatus() == StatusPengaduan.terkirim) {
-                    return "Diproses";
-                } else if (list.get(rowIndex).getStatus() == StatusPengaduan.diproses) {
                     return "Terkirim";
+                } else if (list.get(rowIndex).getStatus() == StatusPengaduan.diproses) {
+                    return "Diproses";
                 } else {
                     return "Selesai";
                 }

@@ -98,6 +98,7 @@ public class PengaduanBaruController {
             ImageIcon icon = new ImageIcon(imagedResized);
             pengaduanBaruView.getLabelImage().setIcon(icon);
             pengaduanBaruView.getLabelImage().setText("");
+            pengaduanBaruView.setVisible(true);
         } else {
             pengaduanBaruView.getLabelImage().setText("Tidak menyertakan foto");
         }
@@ -106,48 +107,84 @@ public class PengaduanBaruController {
 
     private void createNewPengaduan() {
         Pengaduan pengaduan = new Pengaduan();
-                pengaduan.setDate(new DateTools().getMySqlDateNow());
-                pengaduan.setNik(pelapor.getNik());
-                pengaduan.setIsiLaporan(pengaduanBaruView.getFieldLaporan().getText());
-                if (pengaduanBaruView.getFileToUpload() != null) {
-                    FileInputStream fis = null;
-                    try {
-                        fis = new FileInputStream(pengaduanBaruView.getFileToUpload());
-                    } catch (FileNotFoundException ex) {
-                        Logger.getLogger(PengaduanBaruController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    //System.out.println(file.exists() + "!!");
-                    //InputStream in = resource.openStream();
-                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    byte[] buf = new byte[1024];
-                    try {
-                        for (int readNum; (readNum = fis.read(buf)) != -1;) {
-                            bos.write(buf, 0, readNum); //no doubt here is 0
-                            //Writes len bytes from the specified byte array starting at offset off to this byte array output stream.
-                            System.out.println("read " + readNum + " bytes,");
-                        }
-                    } catch (IOException ex) {
-                        Logger.getLogger(PengaduanBaruController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    byte[] bytes = bos.toByteArray();
-                    pengaduan.setFoto(bytes);
+        pengaduan.setDate(new DateTools().getMySqlDateNow());
+        pengaduan.setNik(pelapor.getNik());
+        pengaduan.setIsiLaporan(pengaduanBaruView.getFieldLaporan().getText());
+        if (pengaduanBaruView.getFileToUpload() != null) {
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(pengaduanBaruView.getFileToUpload());
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PengaduanBaruController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //System.out.println(file.exists() + "!!");
+            //InputStream in = resource.openStream();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            try {
+                for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                    bos.write(buf, 0, readNum); //no doubt here is 0
+                    //Writes len bytes from the specified byte array starting at offset off to this byte array output stream.
+                    System.out.println("read " + readNum + " bytes,");
                 }
-                pengaduanDAO.insert(pengaduan, new ResultListener() {
-                    @Override
-                    public void onSuccess() {
-                        pengaduanBaruView.showAlert("Berhasil membuat pengaduan baru!");
-                        pengaduanBaruView.dispose();
-                    }
+            } catch (IOException ex) {
+                Logger.getLogger(PengaduanBaruController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            byte[] bytes = bos.toByteArray();
+            pengaduan.setFoto(bytes);
+        }
+        pengaduanDAO.insert(pengaduan, new ResultListener() {
+            @Override
+            public void onSuccess() {
+                pengaduanBaruView.showAlert("Berhasil membuat pengaduan baru!");
+                pengaduanBaruView.dispose();
+            }
 
-                    @Override
-                    public void onFailure(SQLException e) {
-                        pengaduanBaruView.showErrorAlert("Gagal membuat pengaduan baru!");
-                    }
-                    
-                });
+            @Override
+            public void onFailure(SQLException e) {
+                pengaduanBaruView.showErrorAlert("Gagal membuat pengaduan baru!");
+            }
+
+        });
     }
 
     private void updatePengaduan(Pengaduan pengaduan) {
-        
+        pengaduan.setIsiLaporan(pengaduanBaruView.getFieldLaporan().getText());
+        if (pengaduanBaruView.getFileToUpload() != null) {
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(pengaduanBaruView.getFileToUpload());
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PengaduanBaruController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //System.out.println(file.exists() + "!!");
+            //InputStream in = resource.openStream();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            try {
+                for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                    bos.write(buf, 0, readNum); //no doubt here is 0
+                    //Writes len bytes from the specified byte array starting at offset off to this byte array output stream.
+                    System.out.println("read " + readNum + " bytes,");
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(PengaduanBaruController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            byte[] bytes = bos.toByteArray();
+            pengaduan.setFoto(bytes);
+        }
+        pengaduanDAO.update(pengaduan, new ResultListener() {
+            @Override
+            public void onSuccess() {
+                pengaduanBaruView.showAlert("Berhasil memperbarui pengaduan!");
+                pengaduanBaruView.dispose();
+            }
+
+            @Override
+            public void onFailure(SQLException e) {
+                pengaduanBaruView.showErrorAlert("Gagal membuat pengaduan baru!");
+            }
+
+        });
     }
 }

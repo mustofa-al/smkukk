@@ -112,10 +112,11 @@ public class PengaduanDAO {
     }
     
     public void setStatusPengaduan(int pengaduanId, StatusPengaduan status, ResultListener callback) {
-        String query = "UPDATE pengaduan SET status = '"+status+"' WHERE id_pengaduan=?";
+        String query = "UPDATE pengaduan SET status = ? WHERE id_pengaduan=?";
         try {
             PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
-            statement.setInt(1, pengaduanId);
+            statement.setString(1, status.name());
+            statement.setInt(2, pengaduanId);
             statement.executeUpdate();
             statement.close();
             callback.onSuccess();
@@ -147,6 +148,35 @@ public class PengaduanDAO {
         } catch (SQLException e) {
             Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, null, e);
             callback.onFailure(e);
+        }
+    }
+
+    public void update(Pengaduan pengaduan, ResultListener callback) {
+        String query;
+        InputStream stream = null;
+        if (pengaduan.getFoto() != null) {
+            stream = new FileHelper().byteToInputStream(pengaduan.getFoto());
+            query = "UPDATE pengaduan SET isi_laporan = ?, foto=? WHERE id_pengaduan=?";
+        } else {
+            query = "UPDATE pengaduan SET isi_laporan = ? WHERE id_pengaduan=?";
+        }
+        Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, query);
+        try {
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
+            if (pengaduan.getFoto() != null) {
+                statement.setString(1, pengaduan.getIsiLaporan());
+                statement.setBlob(2, stream);
+                statement.setInt(3, pengaduan.getId());
+            } else {
+                statement.setString(1, pengaduan.getIsiLaporan());
+                statement.setInt(2, pengaduan.getId());
+            }
+            statement.executeUpdate();
+            statement.close();
+            callback.onSuccess();
+        } catch (SQLException ex) {
+            callback.onFailure(ex);
+            Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
