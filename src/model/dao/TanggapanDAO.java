@@ -53,17 +53,19 @@ public class TanggapanDAO {
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             ResultSet result = statement.executeQuery(query);
-            if (result.next()) {
-                Tanggapan tanggapan = new Tanggapan();
-                tanggapan.setTanggapanId(result.getInt("id_tanggapan"));
-                tanggapan.setDate(result.getString("tgl_tanggapan"));
-                tanggapan.setIsiTanggapan(result.getString("tanggapan"));
-                tanggapan.setPengaduan(new Pengaduan());
-                tanggapan.getPengaduan().setIsiLaporan(result.getString("isi_laporan"));
-                tanggapan.setPetugas(new Petugas());
-                tanggapan.getPetugas().setNama(result.getString("nama_petugas"));
-                listTanggapan.add(tanggapan);
-                callback.onSuccess(listTanggapan);
+            if (result != null) {
+                while (result.next()) {                    
+                    Tanggapan tanggapan = new Tanggapan();
+                    tanggapan.setTanggapanId(result.getInt("id_tanggapan"));
+                    tanggapan.setDate(result.getString("tgl_tanggapan"));
+                    tanggapan.setIsiTanggapan(result.getString("tanggapan"));
+                    tanggapan.setPengaduan(new Pengaduan());
+                    tanggapan.getPengaduan().setIsiLaporan(result.getString("isi_laporan"));
+                    tanggapan.setPetugas(new Petugas());
+                    tanggapan.getPetugas().setNama(result.getString("nama_petugas"));
+                    listTanggapan.add(tanggapan);
+                    callback.onSuccess(listTanggapan);
+                }
             } else {
                 callback.onFailure(null);
             }

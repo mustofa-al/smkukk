@@ -63,15 +63,17 @@ public class PengaduanDAO {
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             ResultSet result = statement.executeQuery(query);
-            if (result.next()) {
-                Pengaduan pengaduan = new Pengaduan();
-                pengaduan.setId(result.getInt("id_pengaduan"));
-                pengaduan.setDate(result.getString("tgl_pengaduan"));
-                pengaduan.setIsiLaporan(result.getString("isi_laporan"));
-                pengaduan.setPelapor(new Pelapor());
-                pengaduan.getPelapor().setNama(result.getString("nama"));
-                listPengaduan.add(pengaduan);
-                callback.onSuccess(listPengaduan);
+            if (result != null) {
+                while (result.next()) {                    
+                    Pengaduan pengaduan = new Pengaduan();
+                    pengaduan.setId(result.getInt("id_pengaduan"));
+                    pengaduan.setDate(result.getString("tgl_pengaduan"));
+                    pengaduan.setIsiLaporan(result.getString("isi_laporan"));
+                    pengaduan.setPelapor(new Pelapor());
+                    pengaduan.getPelapor().setNama(result.getString("nama"));
+                    listPengaduan.add(pengaduan);
+                    callback.onSuccess(listPengaduan);
+                }
             } else {
                 callback.onFailure(null);
             }
@@ -119,6 +121,32 @@ public class PengaduanDAO {
             callback.onSuccess();
         } catch (SQLException ex) {
             Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void getData(String nik, ResultDataListener<List<Pengaduan>> callback) {
+        String query = "SELECT pengaduan.id_pengaduan, pengaduan.tgl_pengaduan, pengaduan.isi_laporan, pengaduan.status"
+                + " FROM pengaduan, masyarakat WHERE pengaduan.nik = '"+nik+"'";
+        List<Pengaduan> listPengaduan = new ArrayList<Pengaduan>();
+        try {
+            Statement statement = DBConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query);
+            if (result != null) {
+                while (result.next()) {
+                    Pengaduan pengaduan = new Pengaduan();
+                    pengaduan.setId(result.getInt("id_pengaduan"));
+                    pengaduan.setDate(result.getString("tgl_pengaduan"));
+                    pengaduan.setIsiLaporan(result.getString("isi_laporan"));
+                    pengaduan.setStatus(StatusPengaduan.valueOf(result.getString("status")));
+                    listPengaduan.add(pengaduan);
+                    callback.onSuccess(listPengaduan);
+                }
+            } else {
+                callback.onFailure(null);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, null, e);
+            callback.onFailure(e);
         }
     }
 }

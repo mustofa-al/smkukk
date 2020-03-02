@@ -22,6 +22,7 @@ import view.DetailPengaduan;
 import view.DetailTanggapan;
 import view.PelaporHome;
 import view.PengaduanBaru;
+import view.RiwayatPengaduanSaya;
 
 /**
  *
@@ -49,8 +50,10 @@ public class PelaporHomeController {
 
     private void initListeners() {
         pelaporHomeView.getMenuPengaduanBaru().addActionListener((ae) -> {
-            PengaduanBaru pengaduanBaru = new PengaduanBaru();
-            new PengaduanBaruController(pengaduanBaru, pelapor);
+            new PengaduanBaruController(new PengaduanBaru(), pelapor);
+        });
+        pelaporHomeView.getMenuPengaduanSaya().addActionListener((ae) -> {
+            new RiwayatPengaduanSayaController(new RiwayatPengaduanSaya(), pelapor);
         });
         pelaporHomeView.getTabelTanggapan().addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
