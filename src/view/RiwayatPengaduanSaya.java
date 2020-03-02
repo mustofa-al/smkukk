@@ -40,6 +40,7 @@ public class RiwayatPengaduanSaya extends javax.swing.JFrame {
         labelInfo = new javax.swing.JLabel();
         btDelete = new javax.swing.JButton();
         btEdit = new javax.swing.JButton();
+        btLihatDetail = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Riwayat Pengaduan Saya | Pelaporan Pengaduan Masyarakat");
@@ -101,6 +102,8 @@ public class RiwayatPengaduanSaya extends javax.swing.JFrame {
         btEdit.setText("Ubah");
         btEdit.setEnabled(false);
 
+        btLihatDetail.setText("Lihat Detail");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,7 +113,9 @@ public class RiwayatPengaduanSaya extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 257, Short.MAX_VALUE)
+                        .addGap(0, 154, Short.MAX_VALUE)
+                        .addComponent(btLihatDetail)
+                        .addGap(18, 18, 18)
                         .addComponent(btEdit)
                         .addGap(18, 18, 18)
                         .addComponent(btDelete)))
@@ -124,7 +129,8 @@ public class RiwayatPengaduanSaya extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btDelete)
-                    .addComponent(btEdit))
+                    .addComponent(btEdit)
+                    .addComponent(btLihatDetail))
                 .addContainerGap())
         );
 
@@ -169,6 +175,7 @@ public class RiwayatPengaduanSaya extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDelete;
     private javax.swing.JButton btEdit;
+    private javax.swing.JButton btLihatDetail;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelInfo;
@@ -181,6 +188,10 @@ public class RiwayatPengaduanSaya extends javax.swing.JFrame {
     
     public JTable getTabelPengaduan() {
         return tabelPengaduan;
+    }
+    
+    public JButton getButtonLihatDetail() {
+        return btLihatDetail;
     }
     
     public JButton getButtonEdit() {

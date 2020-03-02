@@ -18,6 +18,7 @@ import model.TabelModelPengaduanSaya;
 import model.dao.PengaduanDAO;
 import model.dao.ResultDataListener;
 import view.DetailPengaduan;
+import view.PengaduanBaru;
 import view.RiwayatPengaduanSaya;
 
 /**
@@ -27,6 +28,7 @@ import view.RiwayatPengaduanSaya;
 public class RiwayatPengaduanSayaController {
     private RiwayatPengaduanSaya pengaduanSayaView;
     private Pelapor pelapor;
+    private Pengaduan selected;
     private PengaduanDAO pengaduanDAO;
     private List<Pengaduan> listPengaduan;
 
@@ -75,18 +77,23 @@ public class RiwayatPengaduanSayaController {
                 int row = table.rowAtPoint(point);
                 if (table.getSelectedRow() != -1) {
                     if (listPengaduan.get(row).getStatus() == StatusPengaduan.terkirim) {
+                        selected = listPengaduan.get(row);
                         enableButtons(true);
                     } else {
+                        selected = listPengaduan.get(row);
                         enableButtons(false);
                     }
                 }
             }
         });
+        pengaduanSayaView.getButtonLihatDetail().addActionListener((ae) -> {
+            new DetailPengaduanController(new DetailPengaduan(), selected.getId(), null);
+        });
         pengaduanSayaView.getButtonDelete().addActionListener((ae) -> {
             // delete
         });
         pengaduanSayaView.getButtonEdit().addActionListener((ae) -> {
-            // update
+            new PengaduanBaruController(new PengaduanBaru(), pelapor, selected);
         });
     }
     

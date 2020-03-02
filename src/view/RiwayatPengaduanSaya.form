@@ -29,7 +29,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="257" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="154" max="32767" attributes="0"/>
+                      <Component id="btLihatDetail" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btEdit" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btDelete" min="-2" max="-2" attributes="0"/>
@@ -48,6 +50,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btEdit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btLihatDetail" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -148,6 +151,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ubah"/>
         <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btLihatDetail">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Lihat Detail"/>
       </Properties>
     </Component>
   </SubComponents>

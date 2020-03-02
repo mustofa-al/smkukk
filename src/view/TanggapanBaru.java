@@ -38,6 +38,7 @@ public class TanggapanBaru extends javax.swing.JFrame {
         btKirimTanggapan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Tanggapan untuk Pengaduan");
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel1.setText("Tanggapan:");

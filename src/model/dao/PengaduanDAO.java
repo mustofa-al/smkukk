@@ -86,7 +86,7 @@ public class PengaduanDAO {
     public void getDetailPengaduan(int pengaduanId, ResultDataListener<Pengaduan> callback) {
         String query = "SELECT masyarakat.nama, masyarakat.telp, pengaduan.id_pengaduan, pengaduan.tgl_pengaduan, "
                 + "pengaduan.isi_laporan, pengaduan.foto FROM pengaduan, masyarakat "
-                + "WHERE pengaduan.id_pengaduan = "+pengaduanId+" AND pengaduan.status = 'terkirim'";
+                + "WHERE pengaduan.id_pengaduan = "+pengaduanId;
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             ResultSet result = statement.executeQuery(query);

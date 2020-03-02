@@ -5,6 +5,7 @@
  */
 package controller;
 
+import com.sun.istack.internal.Nullable;
 import config.DateTools;
 import config.FileHelper;
 import java.awt.Image;
@@ -33,7 +34,7 @@ public class DetailPengaduanController {
     private PengaduanDAO pengaduanDAO;
     Listener listener;
 
-    public DetailPengaduanController(DetailPengaduan detailPengaduanView, int pengaduanId, Petugas petugas) {
+    public DetailPengaduanController(DetailPengaduan detailPengaduanView, int pengaduanId,@Nullable Petugas petugas) {
         this.detailPengaduanView = detailPengaduanView;
         this.pengaduanId = pengaduanId;
         this.petugas = petugas;
@@ -45,6 +46,11 @@ public class DetailPengaduanController {
 
     private void initView() {
         detailPengaduanView.setVisible(true);
+        if (petugas == null) {
+            detailPengaduanView.getButtonTanggapan().setVisible(false);
+        } else {
+            detailPengaduanView.getButtonTanggapan().setVisible(true);
+        }
     }
 
     private void initData() {

@@ -6,6 +6,9 @@
 package controller;
 
 import config.DateTools;
+import config.FileHelper;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,6 +17,8 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import model.Pelapor;
 import model.Pengaduan;
 import model.dao.PengaduanDAO;
@@ -27,6 +32,7 @@ import view.PengaduanBaru;
 public class PengaduanBaruController {
     private PengaduanBaru pengaduanBaruView;
     private Pelapor pelapor;
+    private Pengaduan pengaduan;
     private PengaduanDAO pengaduanDAO;
 
     public PengaduanBaruController(PengaduanBaru pengaduanBaruView, Pelapor pelapor) {
@@ -37,14 +43,69 @@ public class PengaduanBaruController {
         initDAO();
     }
 
+    public PengaduanBaruController(PengaduanBaru pengaduanBaruView, Pelapor pelapor, Pengaduan pengaduan) {
+        this.pengaduanBaruView = pengaduanBaruView;
+        this.pelapor = pelapor;
+        this.pengaduan = pengaduan;
+        initView();
+        initListeners();
+        initDAO();
+    }
+
     private void initView() {
         pengaduanBaruView.setVisible(true);
+        if (pengaduan != null) {
+            bindPengaduan(pengaduan);
+        }
     }
 
     private void initListeners() {
         pengaduanBaruView.getButtonKirim().addActionListener((ae) -> {
             if (isValidForm()) {
-                Pengaduan pengaduan = new Pengaduan();
+                if (pengaduan != null) {
+                    updatePengaduan(pengaduan);
+                } else {
+                    createNewPengaduan();
+                }
+            }
+        });
+    }
+
+    private boolean isValidForm() {
+        boolean isValid = false;
+        if (pengaduanBaruView.getFieldLaporan().getText().length() == 0) {
+            pengaduanBaruView.showAlert("Isi laporan tidak boleh kosong!");
+        } else {
+            isValid = true;
+        }
+        return isValid;
+    }
+
+    private void initDAO() {
+        pengaduanDAO = new PengaduanDAO();
+    }
+
+    private void bindPengaduan(Pengaduan pengaduan) {
+        pengaduanBaruView.getFieldLaporan().setText(pengaduan.getIsiLaporan());
+        if (pengaduan.getFoto() != null) {
+            BufferedImage bi = null;
+            try {
+                bi = ImageIO.read(new FileHelper().byteToInputStream(pengaduan.getFoto()));
+            } catch (IOException ex) {
+                Logger.getLogger(DetailPengaduanController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Image imagedResized = bi.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
+            ImageIcon icon = new ImageIcon(imagedResized);
+            pengaduanBaruView.getLabelImage().setIcon(icon);
+            pengaduanBaruView.getLabelImage().setText("");
+        } else {
+            pengaduanBaruView.getLabelImage().setText("Tidak menyertakan foto");
+        }
+        pengaduanBaruView.getButtonKirim().setText("Simpan");
+    }
+
+    private void createNewPengaduan() {
+        Pengaduan pengaduan = new Pengaduan();
                 pengaduan.setDate(new DateTools().getMySqlDateNow());
                 pengaduan.setNik(pelapor.getNik());
                 pengaduan.setIsiLaporan(pengaduanBaruView.getFieldLaporan().getText());
@@ -84,21 +145,9 @@ public class PengaduanBaruController {
                     }
                     
                 });
-            }
-        });
     }
 
-    private boolean isValidForm() {
-        boolean isValid = false;
-        if (pengaduanBaruView.getFieldLaporan().getText().length() == 0) {
-            pengaduanBaruView.showAlert("Isi laporan tidak boleh kosong!");
-        } else {
-            isValid = true;
-        }
-        return isValid;
-    }
-
-    private void initDAO() {
-        pengaduanDAO = new PengaduanDAO();
+    private void updatePengaduan(Pengaduan pengaduan) {
+        
     }
 }

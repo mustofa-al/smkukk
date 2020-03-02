@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -187,6 +188,10 @@ public class PengaduanBaru extends javax.swing.JFrame {
     
     public File getFileToUpload() {
         return file;
+    }
+    
+    public JLabel getLabelImage() {
+        return labelImage;
     }
     
     public void showAlert(String alert) {
