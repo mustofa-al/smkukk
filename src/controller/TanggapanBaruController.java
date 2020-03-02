@@ -26,6 +26,7 @@ public class TanggapanBaruController {
     private Petugas petugas;
     private TanggapanDAO tanggapanDAO;
     private PengaduanDAO pengaduanDAO;
+    private Tanggapan tanggapan;
     Listener listener;
 
     public TanggapanBaruController(TanggapanBaru tanggapanBaruView, int pengaduanId, Petugas petugas) {
@@ -36,15 +37,52 @@ public class TanggapanBaruController {
         initListener();
         initDAO();
     }
+    
+    public TanggapanBaruController(TanggapanBaru tanggapanBaruView, Tanggapan tanggapan, Petugas petugas) {
+        this.tanggapanBaruView = tanggapanBaruView;
+        this.tanggapan = tanggapan;
+        this.petugas = petugas;
+        initView();
+        initListener();
+        initDAO();
+    }
 
     private void initView() {
         tanggapanBaruView.setVisible(true);
+        if (tanggapan != null) {
+            bindTanggapan(tanggapan);
+        }
     }
 
     private void initListener() {
         tanggapanBaruView.getButtonKirimTanggapan().addActionListener((ae) -> {
             if (isValidInput()) {
-                Tanggapan tanggapan = new Tanggapan();
+                if (pengaduanId != 0) {
+                    createNewTanggapan();
+                } else {
+                    updateTanggapan(tanggapan);
+                }
+            }
+        });
+    }
+
+    private void initDAO() {
+        tanggapanDAO = new TanggapanDAO();
+        pengaduanDAO = new PengaduanDAO();
+    }
+
+    private boolean isValidInput() {
+        boolean isValid = false;
+        if (tanggapanBaruView.getFieldTanggapan().getText().length() == 0) {
+            tanggapanBaruView.showAlert("Tanggapan tidak boleh kosong!");
+        } else {
+            isValid = true;
+        }
+        return isValid;
+    }
+
+    private void createNewTanggapan() {
+        Tanggapan tanggapan = new Tanggapan();
                 tanggapan.setPengaduanId(pengaduanId);
                 tanggapan.setDate(new DateTools().getMySqlDateNow());
                 tanggapan.setIsiTanggapan(tanggapanBaruView.getFieldTanggapan().getText());
@@ -72,23 +110,28 @@ public class TanggapanBaruController {
                         tanggapanBaruView.showErrorAlert("Gagal mengirim tanggapan!");
                     }
                 });
+    }
+
+    private void bindTanggapan(Tanggapan tanggapan) {
+        tanggapanBaruView.getButtonKirimTanggapan().setText("Simpan");
+        tanggapanBaruView.getFieldTanggapan().setText(tanggapan.getIsiTanggapan());
+    }
+
+    private void updateTanggapan(Tanggapan tanggapan) {
+        tanggapan.setIsiTanggapan(tanggapanBaruView.getFieldTanggapan().getText());
+        tanggapanDAO.update(tanggapan, new ResultListener() {
+            @Override
+            public void onSuccess() {
+                tanggapanBaruView.showAlert("Tanggapan berhasil diperbarui!");
+                tanggapanBaruView.dispose();
+                listener.onDisposed();
+            }
+
+            @Override
+            public void onFailure(SQLException e) {
+                tanggapanBaruView.showErrorAlert("Gagal memperbarui tanggapan!");
             }
         });
-    }
-
-    private void initDAO() {
-        tanggapanDAO = new TanggapanDAO();
-        pengaduanDAO = new PengaduanDAO();
-    }
-
-    private boolean isValidInput() {
-        boolean isValid = false;
-        if (tanggapanBaruView.getFieldTanggapan().getText().length() == 0) {
-            tanggapanBaruView.showAlert("Tanggapan tidak boleh kosong!");
-        } else {
-            isValid = true;
-        }
-        return isValid;
     }
     
     public interface Listener {

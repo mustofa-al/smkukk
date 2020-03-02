@@ -164,7 +164,6 @@ public class PengaduanDAO {
         } else {
             query = "UPDATE pengaduan SET isi_laporan = ? WHERE id_pengaduan=?";
         }
-        Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, query);
         try {
             PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
             if (pengaduan.getFoto() != null) {

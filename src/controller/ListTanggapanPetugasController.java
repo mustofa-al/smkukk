@@ -22,6 +22,7 @@ import model.dao.TanggapanDAO;
 import view.DetailPengaduan;
 import view.DetailTanggapan;
 import view.ListTanggapanPetugas;
+import view.TanggapanBaru;
 
 /**
  *
@@ -92,6 +93,15 @@ public class ListTanggapanPetugasController {
         
         listTanggapanPetugasView.getButtonLihatDetail().addActionListener((ae) -> {
             new DetailTanggapanController(new DetailTanggapan(), null, selected);
+        });
+        
+        listTanggapanPetugasView.getButtonUbah().addActionListener((ae) -> {
+            new TanggapanBaruController(new TanggapanBaru(), selected, petugas).listener = new TanggapanBaruController.Listener() {
+                @Override
+                public void onDisposed() {
+                    initData();
+                }
+            };
         });
         
         listTanggapanPetugasView.getButtonHapus().addActionListener((ae) -> {

@@ -150,4 +150,19 @@ public class TanggapanDAO {
             Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void update(Tanggapan tanggapan, ResultListener callback) {
+        String query = "UPDATE tanggapan SET tanggapan = ? WHERE id_tanggapan=?";
+        try {
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
+            statement.setString(1, tanggapan.getIsiTanggapan());
+            statement.setInt(2, tanggapan.getTanggapanId());
+            statement.executeUpdate();
+            statement.close();
+            callback.onSuccess();
+        } catch (SQLException ex) {
+            callback.onFailure(ex);
+            Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
