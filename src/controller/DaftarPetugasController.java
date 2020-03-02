@@ -18,6 +18,7 @@ import model.dao.PetugasDAO;
 import model.dao.ResultDataListener;
 import model.dao.ResultListener;
 import view.DaftarPetugas;
+import view.TambahPetugas;
 
 /**
  *
@@ -92,6 +93,15 @@ public class DaftarPetugasController {
                     }
                 });
             }
+        });
+        
+        daftarPetugasView.getButtonUbah().addActionListener((ae) -> {
+            new TambahPetugasController(new TambahPetugas(), selected).listener = new TambahPetugasController.Listener() {
+                @Override
+                public void onDisposed() {
+                    initData();
+                }
+            };
         });
     }
     

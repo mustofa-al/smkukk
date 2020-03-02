@@ -17,6 +17,7 @@ import model.Pelapor;
 import model.Pengaduan;
 import model.Petugas;
 import model.StatusPetugas;
+import model.Tanggapan;
 import model.db.DBConnection;
 
 /**
@@ -96,6 +97,26 @@ public class PetugasDAO {
         try {
             PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
             statement.setInt(1, id);
+            statement.executeUpdate();
+            statement.close();
+            callback.onSuccess();
+        } catch (SQLException ex) {
+            callback.onFailure(ex);
+            Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void update(Petugas petugas, ResultListener callback) {
+        String query = "UPDATE petugas SET nama_petugas = ?, username = ?, password = MD5(?), "
+                + "telp =?, level = ? WHERE id_petugas=?";
+        try {
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
+            statement.setString(1, petugas.getNama());
+            statement.setString(2, petugas.getUsername());
+            statement.setString(3, petugas.getPassword());
+            statement.setString(4, petugas.getTelp());
+            statement.setString(5, petugas.getStatus().name());
+            statement.setInt(6, petugas.getId());
             statement.executeUpdate();
             statement.close();
             callback.onSuccess();

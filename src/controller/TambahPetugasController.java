@@ -21,6 +21,8 @@ import view.TambahPetugas;
 public class TambahPetugasController {
     private TambahPetugas tambahPetugasView;
     private PetugasDAO petugasDAO;
+    private Petugas petugas;
+    Listener listener;
 
     public TambahPetugasController(TambahPetugas tambahPetugasView) {
         this.tambahPetugasView = tambahPetugasView;
@@ -28,31 +30,30 @@ public class TambahPetugasController {
         initDAO();
         initListener();
     }
+    
+    public TambahPetugasController(TambahPetugas tambahPetugasView, Petugas petugas) {
+        this.tambahPetugasView = tambahPetugasView;
+        this.petugas = petugas;
+        initView();
+        initDAO();
+        initListener();
+    }
 
     private void initView() {
         tambahPetugasView.setVisible(true);
+        if (petugas != null) {
+            bindPetugas(petugas);
+        }
     }
 
     private void initListener() {
         tambahPetugasView.getButtonTambah().addActionListener((ae) -> {
             if (isValidInput()) {
-                Petugas petugas = new Petugas();
-                petugas.setNama(tambahPetugasView.getFieldNamaPetugas().getText());
-                petugas.setUsername(tambahPetugasView.getFieldUsername().getText());
-                petugas.setTelp(tambahPetugasView.getFieldTelp().getText());
-                petugas.setPassword(tambahPetugasView.getFieldPassword().getText());
-                petugasDAO.insert(petugas, new ResultListener() {
-                    @Override
-                    public void onSuccess() {
-                        tambahPetugasView.showAlert("Petugas baru ditambahkan!");
-                        tambahPetugasView.dispose();
-                    }
-
-                    @Override
-                    public void onFailure(SQLException e) {
-                        tambahPetugasView.showErrorAlert("Gagal menambahkan petugas baru!");
-                    }
-                });
+                if (petugas != null) {
+                    updatePetugas(petugas);
+                } else {
+                    createNew();
+                }
             }
         });
     }
@@ -82,6 +83,57 @@ public class TambahPetugasController {
     private void initDAO() {
         petugasDAO = new PetugasDAO();
     }
+
+    private void bindPetugas(Petugas petugas) {
+        tambahPetugasView.getButtonTambah().setText("Simpan");
+        tambahPetugasView.getFieldNamaPetugas().setText(petugas.getNama());
+        tambahPetugasView.getFieldUsername().setText(petugas.getUsername());
+        tambahPetugasView.getFieldTelp().setText(petugas.getTelp());
+    }
+
+    private void createNew() {
+        Petugas petugas = new Petugas();
+        petugas.setNama(tambahPetugasView.getFieldNamaPetugas().getText());
+        petugas.setUsername(tambahPetugasView.getFieldUsername().getText());
+        petugas.setTelp(tambahPetugasView.getFieldTelp().getText());
+        petugas.setPassword(tambahPetugasView.getFieldPassword().getText());
+        petugasDAO.insert(petugas, new ResultListener() {
+            @Override
+            public void onSuccess() {
+                tambahPetugasView.showAlert("Petugas baru ditambahkan!");
+                tambahPetugasView.dispose();
+            }
+
+            @Override
+            public void onFailure(SQLException e) {
+                tambahPetugasView.showErrorAlert("Gagal menambahkan petugas baru!");
+            }
+        });
+    }
+
+    private void updatePetugas(Petugas petugas) {
+        petugas.setNama(tambahPetugasView.getFieldNamaPetugas().getText());
+        petugas.setUsername(tambahPetugasView.getFieldUsername().getText());
+        petugas.setTelp(tambahPetugasView.getFieldTelp().getText());
+        petugas.setPassword(tambahPetugasView.getFieldPassword().getText());
+        petugasDAO.update(petugas, new ResultListener() {
+            @Override
+            public void onSuccess() {
+                tambahPetugasView.showAlert("Data petugas berhasil diperbarui!");
+                tambahPetugasView.dispose();
+                listener.onDisposed();
+            }
+
+            @Override
+            public void onFailure(SQLException e) {
+                tambahPetugasView.showErrorAlert("Gagal memperbarui data petugas!");
+            }
+        });
+    }
     
-    
+    public interface Listener {
+
+        public void onDisposed();
+        
+    }
 }
