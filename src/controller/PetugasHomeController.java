@@ -23,6 +23,7 @@ import model.dao.PetugasDAO;
 import model.dao.ResultDataListener;
 import view.DetailPengaduan;
 import view.PengaduanBaru;
+import view.PengaduanSelesai;
 import view.PetugasHome;
 
 /**
@@ -95,6 +96,10 @@ public class PetugasHomeController {
                     };
                 }
             }
+        });
+        
+        petugasHomeView.getMenuPengaduanSelesai().addActionListener((ae) -> {
+            new PengaduanSelesaiController(new PengaduanSelesai(), petugas);
         });
     }
 

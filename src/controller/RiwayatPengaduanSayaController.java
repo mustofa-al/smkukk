@@ -53,7 +53,7 @@ public class RiwayatPengaduanSayaController {
     }
 
     private void initData() {
-        pengaduanDAO.getData(pelapor.getNik(), new ResultDataListener<List<Pengaduan>>() {
+        pengaduanDAO.getDataByPelapor(pelapor.getNik(), new ResultDataListener<List<Pengaduan>>() {
             @Override
             public void onSuccess(List<Pengaduan> data) {
                 listPengaduan = data;
@@ -81,9 +81,11 @@ public class RiwayatPengaduanSayaController {
                     if (listPengaduan.get(row).getStatus() == StatusPengaduan.terkirim) {
                         selected = listPengaduan.get(row);
                         enableButtons(true);
+                        pengaduanSayaView.getButtonLihatDetail().setEnabled(true);
                     } else {
                         selected = listPengaduan.get(row);
                         enableButtons(false);
+                        pengaduanSayaView.getButtonLihatDetail().setEnabled(true);
                     }
                 }
             }

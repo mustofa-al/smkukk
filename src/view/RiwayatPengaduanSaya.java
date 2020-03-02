@@ -103,6 +103,7 @@ public class RiwayatPengaduanSaya extends javax.swing.JFrame {
         btEdit.setEnabled(false);
 
         btLihatDetail.setText("Lihat Detail");
+        btLihatDetail.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -10,13 +10,13 @@ package model;
  * @author A
  */
 public class Tanggapan {
-    int tanggapanId;
-    int pengaduanId;
-    String date;
-    String isiTanggapan;
-    int petugasId;
-    Petugas petugas;
-    Pengaduan pengaduan;
+    private int tanggapanId;
+    private int pengaduanId;
+    private String date;
+    private String isiTanggapan;
+    private int petugasId;
+    private Petugas petugas;
+    private Pengaduan pengaduan;
 
     public int getTanggapanId() {
         return tanggapanId;

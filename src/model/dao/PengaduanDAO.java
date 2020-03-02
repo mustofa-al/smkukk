@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import model.Pelapor;
 import model.Pengaduan;
 import model.StatusPengaduan;
+import model.Tanggapan;
 import model.db.DBConnection;
 
 /**
@@ -127,7 +128,7 @@ public class PengaduanDAO {
         }
     }
     
-    public void getData(String nik, ResultDataListener<List<Pengaduan>> callback) {
+    public void getDataByPelapor(String nik, ResultDataListener<List<Pengaduan>> callback) {
         String query = "SELECT pengaduan.id_pengaduan, pengaduan.tgl_pengaduan, pengaduan.isi_laporan, pengaduan.status"
                 + " FROM pengaduan, masyarakat WHERE pengaduan.nik = '"+nik+"' ORDER BY pengaduan.id_pengaduan DESC";
         List<Pengaduan> listPengaduan = new ArrayList<Pengaduan>();
@@ -193,6 +194,36 @@ public class PengaduanDAO {
         } catch (SQLException ex) {
             callback.onFailure(ex);
             Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void getPengaduanSelesai(ResultDataListener<List<Pengaduan>> callback) {
+        String query = "SELECT pengaduan.id_pengaduan, pengaduan.tgl_pengaduan, "
+                + "pengaduan.isi_laporan, masyarakat.nama, tanggapan.tanggapan FROM pengaduan, masyarakat, tanggapan"
+                + " WHERE tanggapan.id_pengaduan = pengaduan.id_pengaduan ORDER BY pengaduan.id_pengaduan DESC";
+        List<Pengaduan> listPengaduan = new ArrayList<Pengaduan>();
+        try {
+            Statement statement = DBConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query);
+            if (result != null) {
+                while (result.next()) {                    
+                    Pengaduan pengaduan = new Pengaduan();
+                    pengaduan.setId(result.getInt("id_pengaduan"));
+                    pengaduan.setDate(result.getString("tgl_pengaduan"));
+                    pengaduan.setIsiLaporan(result.getString("isi_laporan"));
+                    pengaduan.setPelapor(new Pelapor());
+                    pengaduan.getPelapor().setNama(result.getString("nama"));
+                    pengaduan.setTanggapan(new Tanggapan());
+                    pengaduan.getTanggapan().setIsiTanggapan(result.getString("tanggapan"));
+                    listPengaduan.add(pengaduan);
+                    callback.onSuccess(listPengaduan);
+                }
+            } else {
+                callback.onFailure(null);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, null, e);
+            callback.onFailure(e);
         }
     }
 }

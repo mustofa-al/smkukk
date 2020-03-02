@@ -18,6 +18,7 @@ public class Pengaduan {
     private Pelapor pelapor;
     private String isiLaporan;
     private byte[] foto;
+    private Tanggapan tanggapan;
     private StatusPengaduan status;
 
     public int getId() {
@@ -75,5 +76,15 @@ public class Pengaduan {
     public void setStatus(StatusPengaduan status) {
         this.status = status;
     }
+
+    public Tanggapan getTanggapan() {
+        return tanggapan;
+    }
+
+    public void setTanggapan(Tanggapan tanggapan) {
+        this.tanggapan = tanggapan;
+    }
+    
+    
     
 }
