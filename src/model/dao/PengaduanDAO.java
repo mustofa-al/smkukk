@@ -114,7 +114,6 @@ public class PengaduanDAO {
         try {
             PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
             statement.setInt(1, pengaduanId);
-            Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, query);
             statement.executeUpdate();
             statement.close();
             callback.onSuccess();

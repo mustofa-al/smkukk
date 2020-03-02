@@ -26,6 +26,7 @@ public class TanggapanBaruController {
     private Petugas petugas;
     private TanggapanDAO tanggapanDAO;
     private PengaduanDAO pengaduanDAO;
+    Listener listener;
 
     public TanggapanBaruController(TanggapanBaru tanggapanBaruView, int pengaduanId, Petugas petugas) {
         this.tanggapanBaruView = tanggapanBaruView;
@@ -56,6 +57,7 @@ public class TanggapanBaruController {
                             public void onSuccess() {
                                 tanggapanBaruView.showAlert("Berhasil mengirim tanggapan!");
                                 tanggapanBaruView.dispose();
+                                listener.onDisposed();
                             }
 
                             @Override
@@ -89,5 +91,9 @@ public class TanggapanBaruController {
         return isValid;
     }
     
-    
+    public interface Listener {
+
+        public void onDisposed();
+        
+    }
 }

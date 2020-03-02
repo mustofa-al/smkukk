@@ -31,6 +31,7 @@ public class DetailPengaduanController {
     private int pengaduanId;
     private Petugas petugas;
     private PengaduanDAO pengaduanDAO;
+    Listener listener;
 
     public DetailPengaduanController(DetailPengaduan detailPengaduanView, int pengaduanId, Petugas petugas) {
         this.detailPengaduanView = detailPengaduanView;
@@ -85,9 +86,19 @@ public class DetailPengaduanController {
 
     private void initListener() {
         detailPengaduanView.getButtonTanggapan().addActionListener((ae) -> {
-            new TanggapanBaruController(new TanggapanBaru(), pengaduanId, petugas);
+            new TanggapanBaruController(new TanggapanBaru(), pengaduanId, petugas).listener = new TanggapanBaruController.Listener() {
+                @Override
+                public void onDisposed() {
+                    detailPengaduanView.dispose();
+                    listener.onDisposed();
+                }
+            };
         });
     }
     
-    
+    public interface Listener {
+
+        public void onDisposed();
+        
+    }
 }
