@@ -28,14 +28,19 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="menuPetugas">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Laporan"/>
+            <Property name="text" type="java.lang.String" value="Lain-lain"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menuBuatLaporan">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Buat Laporan"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuTambahPetugas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tambah Petugas"/>
               </Properties>
             </MenuItem>
           </SubComponents>

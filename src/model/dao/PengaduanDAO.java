@@ -29,18 +29,19 @@ import model.db.DBConnection;
  * @author A
  */
 public class PengaduanDAO {
+
     public void insert(Pengaduan data, ResultListener callback) {
         String query = null;
         InputStream stream = null;
         if (data.getFoto() != null) {
             stream = new FileHelper().byteToInputStream(data.getFoto());
             query = "INSERT INTO pengaduan (tgl_pengaduan, nik, isi_laporan, foto) "
-                +"VALUES (?, ?, ?, ?)";
+                    + "VALUES (?, ?, ?, ?)";
         } else {
             query = "INSERT INTO pengaduan (tgl_pengaduan, nik, isi_laporan) "
-                +"VALUES (?, ?, ?)";
+                    + "VALUES (?, ?, ?)";
         }
-        
+
         try {
             PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
             statement.setString(1, data.getDate());
@@ -66,8 +67,10 @@ public class PengaduanDAO {
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             ResultSet result = statement.executeQuery(query);
-            if (result != null) {
-                while (result.next()) {                    
+            if (result.next() == false) {
+                callback.onFailure(null);
+            } else {
+                do {
                     Pengaduan pengaduan = new Pengaduan();
                     pengaduan.setId(result.getInt("id_pengaduan"));
                     pengaduan.setDate(result.getString("tgl_pengaduan"));
@@ -76,20 +79,18 @@ public class PengaduanDAO {
                     pengaduan.getPelapor().setNama(result.getString("nama"));
                     listPengaduan.add(pengaduan);
                     callback.onSuccess(listPengaduan);
-                }
-            } else {
-                callback.onFailure(null);
+                } while (result.next());
             }
         } catch (SQLException e) {
             Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, null, e);
             callback.onFailure(e);
         }
     }
-    
+
     public void getDetailPengaduan(int pengaduanId, ResultDataListener<Pengaduan> callback) {
         String query = "SELECT masyarakat.nama, masyarakat.telp, pengaduan.id_pengaduan, pengaduan.tgl_pengaduan, "
                 + "pengaduan.isi_laporan, pengaduan.foto FROM pengaduan, masyarakat "
-                + "WHERE pengaduan.id_pengaduan = "+pengaduanId;
+                + "WHERE pengaduan.id_pengaduan = " + pengaduanId;
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             ResultSet result = statement.executeQuery(query);
@@ -113,7 +114,7 @@ public class PengaduanDAO {
             callback.onFailure(e);
         }
     }
-    
+
     public void setStatusPengaduan(int pengaduanId, StatusPengaduan status, ResultListener callback) {
         String query = "UPDATE pengaduan SET status = ? WHERE id_pengaduan=?";
         try {
@@ -127,16 +128,18 @@ public class PengaduanDAO {
             Logger.getLogger(TanggapanDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void getDataByPelapor(String nik, ResultDataListener<List<Pengaduan>> callback) {
         String query = "SELECT pengaduan.id_pengaduan, pengaduan.tgl_pengaduan, pengaduan.isi_laporan, pengaduan.status"
-                + " FROM pengaduan, masyarakat WHERE pengaduan.nik = '"+nik+"' ORDER BY pengaduan.id_pengaduan DESC";
+                + " FROM pengaduan, masyarakat WHERE pengaduan.nik = '" + nik + "' ORDER BY pengaduan.id_pengaduan DESC";
         List<Pengaduan> listPengaduan = new ArrayList<Pengaduan>();
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             ResultSet result = statement.executeQuery(query);
-            if (result != null) {
-                while (result.next()) {
+            if (result.next() == false) {
+                callback.onFailure(null);
+            } else {
+                do {
                     Pengaduan pengaduan = new Pengaduan();
                     pengaduan.setId(result.getInt("id_pengaduan"));
                     pengaduan.setDate(result.getString("tgl_pengaduan"));
@@ -144,9 +147,7 @@ public class PengaduanDAO {
                     pengaduan.setStatus(StatusPengaduan.valueOf(result.getString("status")));
                     listPengaduan.add(pengaduan);
                     callback.onSuccess(listPengaduan);
-                }
-            } else {
-                callback.onFailure(null);
+                } while (result.next());
             }
         } catch (SQLException e) {
             Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, null, e);
@@ -206,7 +207,7 @@ public class PengaduanDAO {
             Statement statement = DBConnection.getConnection().createStatement();
             ResultSet result = statement.executeQuery(query);
             if (result != null) {
-                while (result.next()) {                    
+                while (result.next()) {
                     Pengaduan pengaduan = new Pengaduan();
                     pengaduan.setId(result.getInt("id_pengaduan"));
                     pengaduan.setDate(result.getString("tgl_pengaduan"));

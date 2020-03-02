@@ -45,8 +45,9 @@ public class PetugasHome extends javax.swing.JFrame {
         menuTanggapanSaya = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         menuPengaduanSelesai = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuPetugas = new javax.swing.JMenu();
         menuBuatLaporan = new javax.swing.JMenuItem();
+        menuTambahPetugas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Petugas | Pelaporan Pengaduan Masyarakat");
@@ -121,12 +122,15 @@ public class PetugasHome extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu2.setText("Laporan");
+        menuPetugas.setText("Lain-lain");
 
         menuBuatLaporan.setText("Buat Laporan");
-        jMenu2.add(menuBuatLaporan);
+        menuPetugas.add(menuBuatLaporan);
 
-        jMenuBar1.add(jMenu2);
+        menuTambahPetugas.setText("Tambah Petugas");
+        menuPetugas.add(menuTambahPetugas);
+
+        jMenuBar1.add(menuPetugas);
 
         setJMenuBar(jMenuBar1);
 
@@ -184,7 +188,6 @@ public class PetugasHome extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -192,6 +195,8 @@ public class PetugasHome extends javax.swing.JFrame {
     private javax.swing.JLabel lbInfo;
     private javax.swing.JMenuItem menuBuatLaporan;
     private javax.swing.JMenuItem menuPengaduanSelesai;
+    private javax.swing.JMenu menuPetugas;
+    private javax.swing.JMenuItem menuTambahPetugas;
     private javax.swing.JMenuItem menuTanggapanSaya;
     private javax.swing.JTable tabelPengaduan;
     // End of variables declaration//GEN-END:variables
@@ -214,5 +219,13 @@ public class PetugasHome extends javax.swing.JFrame {
     
     public JMenuItem getMenuPengaduanSelesai() {
         return menuPengaduanSelesai;
+    }
+    
+    public JMenu getMenuPetugas() {
+        return menuPetugas;
+    }
+    
+    public JMenuItem getMenuTambahPetugas() {
+        return menuTambahPetugas;
     }
 }

@@ -54,8 +54,10 @@ public class TanggapanDAO {
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             ResultSet result = statement.executeQuery(query);
-            if (result != null) {
-                while (result.next()) {                    
+            if (result.next() == false) {
+                callback.onFailure(null);
+            } else {
+                do {
                     Tanggapan tanggapan = new Tanggapan();
                     tanggapan.setTanggapanId(result.getInt("id_tanggapan"));
                     tanggapan.setDate(result.getString("tgl_tanggapan"));
@@ -66,9 +68,7 @@ public class TanggapanDAO {
                     tanggapan.getPetugas().setNama(result.getString("nama_petugas"));
                     listTanggapan.add(tanggapan);
                     callback.onSuccess(listTanggapan);
-                }
-            } else {
-                callback.onFailure(null);
+                } while (result.next());
             }
         } catch (SQLException e) {
             Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, null, e);

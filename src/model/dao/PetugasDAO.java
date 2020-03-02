@@ -42,4 +42,23 @@ public class PetugasDAO {
             callback.onFailure(e);
         }
     }
+
+    public void insert(Petugas petugas, ResultListener callback) {
+        String query = "INSERT INTO petugas (nama_petugas, username, password, telp, level) "
+                +"VALUES (?, ?, MD5(?), ?, ?)";
+        try {
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
+            statement.setString(1, petugas.getNama());
+            statement.setString(2, petugas.getUsername());
+            statement.setString(3, petugas.getPassword());
+            statement.setString(4, petugas.getTelp());
+            statement.setString(5, StatusPetugas.petugas.name());
+            statement.execute();
+            statement.close();
+            callback.onSuccess();
+        } catch (SQLException e) {
+            Logger.getLogger(PelaporDAO.class.getName()).log(Level.SEVERE, null, e);
+            callback.onFailure(e);
+        }
+    }
 }

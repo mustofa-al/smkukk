@@ -25,6 +25,7 @@ import view.DetailPengaduan;
 import view.PengaduanBaru;
 import view.PengaduanSelesai;
 import view.PetugasHome;
+import view.TambahPetugas;
 
 /**
  *
@@ -51,8 +52,10 @@ public class PetugasHomeController {
         String status = null;
         if (petugas.getStatus() == StatusPetugas.admin) {
             status = "Admin";
+            petugasHomeView.getMenuPetugas().setVisible(true);
         } else if (petugas.getStatus() == StatusPetugas.petugas) {
             status = "Petugas";
+            petugasHomeView.getMenuPetugas().setVisible(false);
         }
         petugasHomeView.getLabelInfo().setText("Login sebagai: " + petugas.getNama() + " (" + status + ")");
     }
@@ -100,6 +103,10 @@ public class PetugasHomeController {
         
         petugasHomeView.getMenuPengaduanSelesai().addActionListener((ae) -> {
             new PengaduanSelesaiController(new PengaduanSelesai(), petugas);
+        });
+        
+        petugasHomeView.getMenuTambahPetugas().addActionListener((ae) -> {
+            new TambahPetugasController(new TambahPetugas());
         });
     }
 
