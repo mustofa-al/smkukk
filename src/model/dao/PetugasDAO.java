@@ -9,9 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Pelapor;
+import model.Pengaduan;
 import model.Petugas;
 import model.StatusPetugas;
 import model.db.DBConnection;
@@ -58,6 +61,32 @@ public class PetugasDAO {
             callback.onSuccess();
         } catch (SQLException e) {
             Logger.getLogger(PelaporDAO.class.getName()).log(Level.SEVERE, null, e);
+            callback.onFailure(e);
+        }
+    }
+
+    public void getPetugas(ResultDataListener<List<Petugas>> callback) {
+        String query = "SELECT * FROM petugas";
+        List<Petugas> listPetugas = new ArrayList<Petugas>();
+        try {
+            Statement statement = DBConnection.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query);
+            if (result.next() == false) {
+                callback.onFailure(null);
+            } else {
+                do {
+                    Petugas petugas = new Petugas();
+                    petugas.setId(result.getInt("id_petugas"));
+                    petugas.setNama(result.getString("nama_petugas"));
+                    petugas.setUsername(result.getString("username"));
+                    petugas.setTelp(result.getString("telp"));
+                    petugas.setStatus(StatusPetugas.valueOf(result.getString("level")));
+                    listPetugas.add(petugas);
+                    callback.onSuccess(listPetugas);
+                } while (result.next());
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(PetugasDAO.class.getName()).log(Level.SEVERE, null, e);
             callback.onFailure(e);
         }
     }

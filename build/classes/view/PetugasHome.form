@@ -43,6 +43,11 @@
                 <Property name="text" type="java.lang.String" value="Tambah Petugas"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuDaftarPetugas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Daftar Petugas"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>

@@ -48,6 +48,7 @@ public class PetugasHome extends javax.swing.JFrame {
         menuPetugas = new javax.swing.JMenu();
         menuBuatLaporan = new javax.swing.JMenuItem();
         menuTambahPetugas = new javax.swing.JMenuItem();
+        menuDaftarPetugas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Petugas | Pelaporan Pengaduan Masyarakat");
@@ -130,6 +131,9 @@ public class PetugasHome extends javax.swing.JFrame {
         menuTambahPetugas.setText("Tambah Petugas");
         menuPetugas.add(menuTambahPetugas);
 
+        menuDaftarPetugas.setText("Daftar Petugas");
+        menuPetugas.add(menuDaftarPetugas);
+
         jMenuBar1.add(menuPetugas);
 
         setJMenuBar(jMenuBar1);
@@ -194,6 +198,7 @@ public class PetugasHome extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbInfo;
     private javax.swing.JMenuItem menuBuatLaporan;
+    private javax.swing.JMenuItem menuDaftarPetugas;
     private javax.swing.JMenuItem menuPengaduanSelesai;
     private javax.swing.JMenu menuPetugas;
     private javax.swing.JMenuItem menuTambahPetugas;
@@ -231,5 +236,9 @@ public class PetugasHome extends javax.swing.JFrame {
     
     public JMenuItem getMenuTanggapanSaya() {
         return menuTanggapanSaya;
+    }
+    
+    public JMenuItem getMenuDaftarPetugas() {
+        return menuDaftarPetugas;
     }
 }
