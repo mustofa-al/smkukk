@@ -46,7 +46,9 @@ public class PetugasHome extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         menuPengaduanSelesai = new javax.swing.JMenuItem();
         menuPetugas = new javax.swing.JMenu();
-        menuBuatLaporan = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menuPengaduanMasuk = new javax.swing.JMenuItem();
+        menuDitanggapi = new javax.swing.JMenuItem();
         menuTambahPetugas = new javax.swing.JMenuItem();
         menuDaftarPetugas = new javax.swing.JMenuItem();
 
@@ -125,8 +127,15 @@ public class PetugasHome extends javax.swing.JFrame {
 
         menuPetugas.setText("Lain-lain");
 
-        menuBuatLaporan.setText("Buat Laporan");
-        menuPetugas.add(menuBuatLaporan);
+        jMenu2.setText("Buat Laporan");
+
+        menuPengaduanMasuk.setText("Laporan Pengaduan Masuk");
+        jMenu2.add(menuPengaduanMasuk);
+
+        menuDitanggapi.setText("Laporan Pengaduan Ditanggapi");
+        jMenu2.add(menuDitanggapi);
+
+        menuPetugas.add(jMenu2);
 
         menuTambahPetugas.setText("Tambah Petugas");
         menuPetugas.add(menuTambahPetugas);
@@ -192,13 +201,15 @@ public class PetugasHome extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbInfo;
-    private javax.swing.JMenuItem menuBuatLaporan;
     private javax.swing.JMenuItem menuDaftarPetugas;
+    private javax.swing.JMenuItem menuDitanggapi;
+    private javax.swing.JMenuItem menuPengaduanMasuk;
     private javax.swing.JMenuItem menuPengaduanSelesai;
     private javax.swing.JMenu menuPetugas;
     private javax.swing.JMenuItem menuTambahPetugas;
@@ -240,5 +251,13 @@ public class PetugasHome extends javax.swing.JFrame {
     
     public JMenuItem getMenuDaftarPetugas() {
         return menuDaftarPetugas;
+    }
+    
+    public JMenuItem getMenuPengaduanMasuk() {
+        return menuPengaduanMasuk;
+    }
+    
+    public JMenuItem getMenuDitanggapi() {
+        return menuDitanggapi;
     }
 }

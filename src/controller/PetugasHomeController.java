@@ -8,6 +8,7 @@ package controller;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,12 @@ import model.TabelModelPengaduan;
 import model.dao.PengaduanDAO;
 import model.dao.PetugasDAO;
 import model.dao.ResultDataListener;
+import model.db.DBConnection;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import view.DaftarPetugas;
 import view.DetailPengaduan;
 import view.ListTanggapanPetugas;
@@ -117,6 +124,30 @@ public class PetugasHomeController {
         
         petugasHomeView.getMenuDaftarPetugas().addActionListener((ae) -> {
             new DaftarPetugasController(new DaftarPetugas());
+        });
+        
+        petugasHomeView.getMenuPengaduanMasuk().addActionListener((ae) -> {
+            try {
+                File f = new File("src/report/laporan_pengaduan_masuk.jrxml");
+                JasperReport jr = JasperCompileManager.compileReport(f.getAbsolutePath());
+                JasperPrint jp = JasperFillManager.fillReport(jr,null, DBConnection.getConnection());
+                JasperViewer.viewReport(jp);
+            } catch (Exception e) {
+                e.printStackTrace();
+                petugasHomeView.showErrorAlert("Gagal memuat laporan!");
+            }
+        });
+        
+        petugasHomeView.getMenuDitanggapi().addActionListener((ae) -> {
+            try {
+                File f = new File("src/report/laporan_pengaduan_selesai.jrxml");
+                JasperReport jr = JasperCompileManager.compileReport(f.getAbsolutePath());
+                JasperPrint jp = JasperFillManager.fillReport(jr,null, DBConnection.getConnection());
+                JasperViewer.viewReport(jp);
+            } catch (Exception e) {
+                e.printStackTrace();
+                petugasHomeView.showErrorAlert("Gagal memuat laporan!");
+            }
         });
     }
 

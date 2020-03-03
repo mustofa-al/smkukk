@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d5103ac8-1554-4de8-85ee-97bd414c1766">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT pengaduan.tgl_pengaduan, pengaduan.isi_laporan, masyarakat.nama, masyarakat.telp FROM pengaduan, masyarakat WHERE pengaduan.status = 'selesai' ORDER BY pengaduan.id_pengaduan DESC]]>
+	</queryString>
+	<field name="tgl_pengaduan" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="isi_laporan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0061d401-eebe-4ba8-a13e-5fba202bf79c" style="Title" x="70" y="19" width="414" height="33"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Laporan Pengaduan Ditanggapi]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement uuid="3f3c95f4-a14f-4f10-9a29-e4754b96f915" positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="fab345da-53d1-456d-81b0-df4034dc9eac" style="Column header" x="0" y="19" width="120" height="15"/>
+				<textElement/>
+				<text><![CDATA[tgl_pengaduan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e598c1c0-895c-4c57-bec5-c13dd3663237" style="Column header" x="120" y="19" width="113" height="15"/>
+				<textElement/>
+				<text><![CDATA[nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a5c5bdef-c0df-4de7-9721-685ac4cf12eb" style="Column header" x="233" y="19" width="181" height="15"/>
+				<textElement/>
+				<text><![CDATA[isi_laporan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="10db3eb9-3f62-455f-8df4-c293365d12c1" style="Column header" x="414" y="19" width="138" height="15"/>
+				<textElement/>
+				<text><![CDATA[telp]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="aab5e43e-32c8-4f43-9ae6-1de0d9daa38a" positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="74ba6e97-0dbc-4eda-be15-d36135723cfb" style="Detail" x="0" y="0" width="120" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tgl_pengaduan}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c542bdb7-90ed-4043-99c0-9caddc46c7c3" style="Detail" x="120" y="0" width="113" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="52210bd0-c172-4d6d-b7e8-2b2113c724f9" style="Detail" x="233" y="0" width="181" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{isi_laporan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2ddf9a32-70d6-4f55-abb3-b3fe33e87251" style="Detail" x="414" y="0" width="138" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{telp}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement uuid="e38efc33-71e4-418e-909e-225cb623936f" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="4ee83d14-3255-42d4-bd41-0b8d8d190933" style="Column header" x="433" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="cd65ee52-acd3-46c9-92ec-28382b14283a" style="Column header" x="513" y="0" width="40" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="96575df9-f7ba-4de4-997d-cb1c0ff81e03" style="Column header" x="0" y="0" width="197" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

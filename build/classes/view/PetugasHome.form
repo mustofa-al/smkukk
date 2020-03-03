@@ -33,11 +33,23 @@
             <Property name="text" type="java.lang.String" value="Lain-lain"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="menuBuatLaporan">
+            <Menu class="javax.swing.JMenu" name="jMenu2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Buat Laporan"/>
               </Properties>
-            </MenuItem>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="menuPengaduanMasuk">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Laporan Pengaduan Masuk"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="menuDitanggapi">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Laporan Pengaduan Ditanggapi"/>
+                  </Properties>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
             <MenuItem class="javax.swing.JMenuItem" name="menuTambahPetugas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tambah Petugas"/>
