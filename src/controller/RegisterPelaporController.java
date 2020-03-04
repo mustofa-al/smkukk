@@ -5,7 +5,6 @@
  */
 package controller;
 
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import static com.sun.org.apache.xerces.internal.util.FeatureState.is;
 import com.sun.xml.internal.ws.util.StringUtils;
 import model.dao.PelaporDAO;
@@ -56,11 +55,7 @@ public class RegisterPelaporController {
 
                     @Override
                     public void onFailure(SQLException e) {
-                        if (e instanceof MySQLIntegrityConstraintViolationException) {
-                            registerPelaporView.showErrorAlert("Gagal mendaftar. NIK sudah terdaftar!");
-                        } else {
-                            registerPelaporView.showErrorAlert("Gagal mendaftar. Cek kembali data yang Anda masukkan!");
-                        }
+                        registerPelaporView.showErrorAlert("Gagal mendaftar. Cek kembali data yang Anda masukkan!");
                     }
                 });
             }
