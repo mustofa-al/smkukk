@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2020 at 07:25 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Generation Time: Mar 04, 2020 at 06:14 AM
+-- Server version: 10.1.29-MariaDB
+-- PHP Version: 7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -47,7 +47,7 @@ CREATE TABLE `pengaduan` (
   `tgl_pengaduan` date NOT NULL,
   `nik` varchar(16) NOT NULL,
   `isi_laporan` text NOT NULL,
-  `foto` longblob DEFAULT NULL,
+  `foto` longblob,
   `status` enum('terkirim','diproses','selesai') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -71,7 +71,7 @@ CREATE TABLE `petugas` (
 --
 
 INSERT INTO `petugas` (`id_petugas`, `nama_petugas`, `username`, `password`, `telp`, `level`) VALUES
-(1, 'Admin Default', 'defaultadmin', '4a094e453e6ee6a8253def63db4d1509', '085292314608', 'admin');
+(1, 'Admin (Default)', 'admin', '5f4dcc3b5aa765d61d8327deb882cf99', '085292314608', 'admin');
 
 -- --------------------------------------------------------
 
