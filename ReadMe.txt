@@ -2,7 +2,7 @@ Installasi Project. Untuk Siswa SMK
 1. Import Project ini
 2. Import database "pengaduan_masyarakat.sql".
    - Buka XAMPP, aktifkan "Apache" dan "MySQL".
-   - Buka "phpMyAdmin" di browser.
+   - Buka "localhost/phpMyAdmin" di browser.
    - Buat database baru dengan nama "pengaduan_masyarakat".
    - Pilih menu import. Pilih "Choose File" dan cari file "pengaduan_masyarakat.sql" di folder sini.
    - Pilih "Go".
