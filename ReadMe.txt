@@ -9,3 +9,7 @@ Installasi Project. Untuk Siswa SMK
 Saya asumsikan phpMyAdmin Anda menggunakan bahasa Inggris.
 3. Sesuaikan dengan kebutuhan, dengan cara mengedit tampilannya.
 4. Jalankan project dan jawab pertanyaan yang diberikan penilai.
+
+
+Username: admin
+Password: password
