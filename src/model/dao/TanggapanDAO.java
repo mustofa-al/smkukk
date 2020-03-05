@@ -51,7 +51,7 @@ public class TanggapanDAO {
                 + " petugas.nama_petugas FROM pengaduan, tanggapan, petugas, masyarakat "
                 + "WHERE tanggapan.id_pengaduan = pengaduan.id_pengaduan "
                 + "AND masyarakat.nik = '" + pelapor.getNik() + "'" + " AND pengaduan.status = 'diproses'"
-                + " ORDER BY tanggapan.id_tanggapan DESC";
+                + " GROUP BY tanggapan.id_tanggapan ORDER BY tanggapan.id_tanggapan DESC";
         List<Tanggapan> listTanggapan = new ArrayList<Tanggapan>();
         try {
             Statement statement = DBConnection.getConnection().createStatement();
