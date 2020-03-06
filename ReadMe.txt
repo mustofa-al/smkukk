@@ -10,6 +10,7 @@ Saya asumsikan phpMyAdmin Anda menggunakan bahasa Inggris.
 3. Sesuaikan dengan kebutuhan, dengan cara mengedit tampilannya.
 4. Jalankan project dan jawab pertanyaan yang diberikan penilai.
 
+Default login aplikasi:
 Username: admin
 Password: password
 
