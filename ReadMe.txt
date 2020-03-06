@@ -10,6 +10,10 @@ Saya asumsikan phpMyAdmin Anda menggunakan bahasa Inggris.
 3. Sesuaikan dengan kebutuhan, dengan cara mengedit tampilannya.
 4. Jalankan project dan jawab pertanyaan yang diberikan penilai.
 
-
 Username: admin
 Password: password
+
+Bahasa Pemrograman   : Java
+Database             : MySQL
+IDE Tools            : NetBeans
+Design Arsitektur    : MVC (Model View Controller)
