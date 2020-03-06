@@ -18,3 +18,8 @@ Bahasa Pemrograman   : Java
 Database             : MySQL
 IDE Tools            : NetBeans
 Design Arsitektur    : MVC (Model View Controller)
+
+Cara export database:
+1. Pilih database, kemudian pilih menu "Export", kemudian pilih "Go"
+2. File akan terdownload ke komputer, cari file dan jadikan 1 folder dengan project.
+Apabila file sudah ada, replace file lama dengan hasil export Anda
