@@ -28,6 +28,7 @@ Use case:
 - Pelapor mendaftar
 - Pelapor membuat pengaduan
   - Pelapor dapat melihat riwayat pengaduannya
+  - Set laporan selesai apabila laporan telah ditanggapi
 
 - Petugas login
 - Petugas menanggapi pengaduan
