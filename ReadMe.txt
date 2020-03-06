@@ -23,3 +23,18 @@ Cara export database:
 1. Pilih database Anda ("pengaduan_masyarakat"), kemudian pilih menu "Export", kemudian pilih "Go"
 2. File akan terdownload ke komputer, cari file dan jadikan 1 folder dengan project.
 Apabila file sudah ada, replace file lama dengan hasil export Anda
+
+Use case:
+- Pelapor mendaftar
+- Pelapor membuat pengaduan
+  - Pelapor dapat melihat riwayat pengaduannya
+
+- Petugas login
+- Petugas menanggapi pengaduan
+  - Petugas dapat melihat riwayat tanggapan oleh diri sendiri
+  
+- Admin login
+- Admin menanggapi pengaduan
+   - Admin dapat melihat riwayat tanggapan oleh diri sendiri
+   - Admin dapat mengelola (menambah, mengubah, dan menghapus)petugas
+   - Admin dapat mencetak laporan
